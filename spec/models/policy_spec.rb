@@ -15,6 +15,10 @@ describe Policy do
     FactoryGirl.build(:policy, site_id: nil).should_not be_valid
   end
   
+  pending "is invalid if url and xpath are duplicates"
+  pending "is invalid if the site_id and name are duplicates"
+  pending "is valid if url is duplicate but xpath is different"
+  pending "is valid if xpath is duplicate but url is different"
   # describe "with duplicate url" do
   #   before :each do
   #     @fb = FactoryGirl.create(:site)
