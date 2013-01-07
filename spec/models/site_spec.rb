@@ -8,15 +8,20 @@ describe Site do
   it "is invalid without a url" do
     FactoryGirl.build(:site, name: nil).should_not be_valid
   end
-  describe "with duplicate name attribute" do
+  
+  describe "with duplicate url" do
     before :each do
       @fb = FactoryGirl.create(:site)
+      @dup_site = FactoryGirl.build(:site)
     end
     
-    it "is invalid without a case insensitive unique url" do
-      dup_site = FactoryGirl.build(:site)
-      dup_site.name.upcase
-      dup_site.should_not be_valid
+    it "is invalid without a unique url" do
+      @dup_site.should_not be_valid
+    end
+    
+    it "is invalid if url isn't unique (case insensitive)" do
+      @dup_site.name.upcase!
+      @dup_site.should_not be_valid
     end
   end
 end
