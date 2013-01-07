@@ -8,7 +8,7 @@ describe Site do
   it "is invalid without a url" do
     FactoryGirl.build(:site, name: nil).should_not be_valid
   end
-  describe "duplicate site" do
+  describe "with duplicate name attribute" do
     before :each do
       @fb = FactoryGirl.create(:site)
     end
