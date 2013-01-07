@@ -20,7 +20,7 @@ module Tosback3
     #generator config for rspec and factory_girl
     config.generators do |g|
       g.test_framework :rspec,
-        :fixtures => true,
+        :fixtures => true
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
     end
     # Settings in config/environments/* take precedence over those specified here.
