@@ -9,19 +9,18 @@ describe Site do
     FactoryGirl.build(:site, name: nil).should_not be_valid
   end
   
-  describe "with duplicate url" do
-    before :each do
-      @fb = FactoryGirl.create(:site)
-      @dup_site = FactoryGirl.build(:site)
-    end
+  describe "#validates uniqueness" do
+    let!(:example) { FactoryGirl.create(:site) }
+    let(:dup_site) { FactoryGirl.build(:site) }
     
     it "is invalid without a unique url" do
-      @dup_site.should_not be_valid
+      dup_site.should_not be_valid
     end
     
     it "is invalid if url isn't unique (case insensitive)" do
-      @dup_site.name.upcase!
-      @dup_site.should_not be_valid
+      dup_site.name.upcase!
+      dup_site.should_not be_valid
     end
-  end
+  end #validates uniqueness
+  
 end
