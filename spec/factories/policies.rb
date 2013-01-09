@@ -15,6 +15,5 @@ FactoryGirl.define do
     This information allows us to provide you with a customized and efficient experience.
     We collect the following types of information from our 500px users:<br>
     <br>"
-    site_id 1
   end
 end
