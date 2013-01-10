@@ -10,7 +10,7 @@ describe Policy do
   # end
   
   describe "#validates" do
-    describe "attributes can't be blank" do
+    describe "presence" do
       it "is invalid without a name" do
         FactoryGirl.build(:policy, name: nil).should_not be_valid
       end 
@@ -19,16 +19,13 @@ describe Policy do
       end
     end
     
-    describe "attributes must be unique" do
-      let(:uniq) { FactoryGirl.create(:policy) }
+    describe "uniqueness" do
+      let!(:uniq) { FactoryGirl.create(:policy) }
       let(:dup) { FactoryGirl.build(:policy) }
     
-      context "when url and xpath are duplicates" do
-        it "is invalid" do
-          dup.should_not be_valid
-        end
+      it "duplicate policy is invalid" do
+        dup.should_not be_valid
       end
-      
       it "is valid if url is duplicate but xpath is different" do
         dup.xpath = "//div[@id='xxxxx']"
         dup.should be_valid
