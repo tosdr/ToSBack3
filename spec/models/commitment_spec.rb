@@ -24,12 +24,12 @@ describe Commitment do
       end
       
       it "is valid if site id is unique and policy id exists" do
-        comm.site_id = 22
+        comm.site_id = 2
         comm.should be_valid
       end
       
       it "is valid if policy id is unique and site id exists" do
-        comm.policy_id = 22
+        comm.policy_id = 2
         comm.should be_valid
       end
     end
