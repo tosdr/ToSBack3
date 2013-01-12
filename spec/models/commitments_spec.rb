@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Commitments do
   it "has a valid factory" do
-    FactoryGirl.create(:commitment).should be_valid
+    FactoryGirl.build(:commitment).should be_valid
   end
   
   describe "#validates" do
