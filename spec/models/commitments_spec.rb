@@ -9,11 +9,11 @@ describe Commitments do
     let(:comm) { FactoryGirl.build(:commitment) }
     
     it "is invalid without site_id" do
-      FactoryGirl.build(:commitment, site_id: nil)
+      FactoryGirl.build(:commitment, site_id: nil).should_not be_valid
     end
     
     it "is invalid without policy_id" do
-      FactoryGirl.build(:commitment, policy_id: nil)
+      FactoryGirl.build(:commitment, policy_id: nil).should_not be_valid
     end
     
     context "when row exists in database" do
