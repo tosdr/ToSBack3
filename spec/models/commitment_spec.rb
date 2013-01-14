@@ -6,7 +6,7 @@ describe Commitment do
   end
   
   it { should respond_to(:site) }
-  it { should respond_to(:policy) }  
+  it { should respond_to(:policy) }
   
   describe "#validates" do
     let(:comm) { FactoryGirl.build(:commitment) }

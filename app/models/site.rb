@@ -1,4 +1,5 @@
 class Site < ActiveRecord::Base
+  has_many :commitments
   has_many :policies, through: :commitments
   attr_accessible :name
   

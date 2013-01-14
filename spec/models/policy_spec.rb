@@ -7,6 +7,7 @@ describe Policy do
   end
   
   it { should respond_to(:sites) }
+  it { should respond_to(:commitments) }
   
   describe "#validates" do
     describe "presence" do

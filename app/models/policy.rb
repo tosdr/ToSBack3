@@ -1,4 +1,5 @@
 class Policy < ActiveRecord::Base
+  has_many :commitments
   has_many :sites, through: :commitments
   attr_accessible :crawl, :lang, :name, :url, :xpath
   

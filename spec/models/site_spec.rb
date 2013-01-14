@@ -9,7 +9,8 @@ describe Site do
     FactoryGirl.build(:site, name: nil).should_not be_valid
   end
   
-  it { should respond_to(:policies) }
+  it { should respond_to(:policies) }  
+  it { should respond_to(:commitments) }
     
   describe "#validates uniqueness" do
     let!(:example) { FactoryGirl.create(:site) }
