@@ -5,9 +5,8 @@ describe Policy do
   it "has a valid factory" do
     FactoryGirl.create(:policy).should be_valid
   end
-  # it "is invalid without a site_id" do
-  #   FactoryGirl.build(:policy, site_id: nil).should_not be_valid
-  # end
+  
+  it { should respond_to(:sites) }
   
   describe "#validates" do
     describe "presence" do

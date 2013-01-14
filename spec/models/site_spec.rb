@@ -9,6 +9,8 @@ describe Site do
     FactoryGirl.build(:site, name: nil).should_not be_valid
   end
   
+  it { should respond_to(:policies) }
+    
   describe "#validates uniqueness" do
     let!(:example) { FactoryGirl.create(:site) }
     let(:dup_site) { FactoryGirl.build(:site) }
@@ -22,5 +24,7 @@ describe Site do
       dup_site.should_not be_valid
     end
   end #validates uniqueness
+  
+  # describe ""
   
 end
