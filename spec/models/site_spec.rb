@@ -24,6 +24,15 @@ describe Site do
       dup_site.name.upcase!
       dup_site.should_not be_valid
     end
+    
+    context "when it has a policy" do
+      let!(:policy) {FactoryGirl.create(:policy) }
+      let!(:commitment) {FactoryGirl.create(:commitment) }
+      
+      it "#policies has a policy" do
+        example.policies.should include(policy)
+      end
+    end
   end #validates uniqueness
   
   # describe ""

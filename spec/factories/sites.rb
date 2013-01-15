@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :site do |f|
-    f.name "example.com"
+    f.name "site.com"
   end
 end
