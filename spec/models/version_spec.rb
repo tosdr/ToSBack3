@@ -15,8 +15,8 @@ describe Version do
       version.should_not be_valid
     end
     
-    it "is invalid without previous data" do
-      version.previous_crawl = nil
+    it "is invalid without previous_crawl" do
+      version.previous_crawl = "   "
       version.should_not be_valid
     end
   end
