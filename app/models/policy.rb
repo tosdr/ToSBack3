@@ -6,4 +6,8 @@ class Policy < ActiveRecord::Base
   
   validates :name, :url, presence: true
   validates :xpath, uniqueness: {:scope => :url}
+  
+  after_create do |p|
+    p.versions.create(previous_crawl: "Current Version")
+  end
 end
