@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :crawl do
     policy_id 1
-    crawl "MyText"
+    scrape "<h1>Privacy Policy</h1><p>trust.us cares about your privacy</p>"
   end
 end
