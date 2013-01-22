@@ -6,7 +6,7 @@ FactoryGirl.define do
     url "http://www.site.com/privacy"
     xpath "//div[@id='content']"
     lang "EN"
-    crawl " <p>500px is founded on the principle of helping people discover new photos and photographers.
+    detail " <p>500px is founded on the principle of helping people discover new photos and photographers.
     We know that you care about how your personal information is used and shared, and we take your privacy very seriously.
     By visiting the 500px website, you are accepting the practices outlined in this policy.</p>
     <p>This Privacy Policy covers 500px's treatment of personal information that 500px gathers when you are on the 500px website and when you use 500px services.

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130122214855) do
+ActiveRecord::Schema.define(:version => 20130122221303) do
 
   create_table "commitments", :force => true do |t|
     t.integer  "policy_id"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20130122214855) do
     t.string   "url"
     t.string   "xpath"
     t.string   "lang"
-    t.text     "crawl"
+    t.text     "detail"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
