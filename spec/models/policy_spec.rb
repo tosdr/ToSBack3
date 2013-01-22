@@ -9,6 +9,7 @@ describe Policy do
   it { should respond_to(:sites) }
   it { should respond_to(:commitments) }
   it { should respond_to(:versions) }
+  it { should respond_to(:crawl) }
   
   describe "#validates" do
     it "is invalid without a name" do
