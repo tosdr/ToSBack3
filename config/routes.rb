@@ -1,4 +1,6 @@
 Tosback3::Application.routes.draw do
+  resources :sites, only: :index
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
