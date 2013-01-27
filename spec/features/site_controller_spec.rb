@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe "Site Controller" do
   describe "site_path#index" do
-    let!(:sites) {30.times {FactoryGirl.create(:site)} }
+    before(:all) { 30.times { FactoryGirl.create(:site_sequence) } }
+    after(:all)  { Site.delete_all }    
     
     before(:each) do
       visit sites_path
@@ -13,7 +14,7 @@ describe "Site Controller" do
     end
     
     it "doesn't contain the last site (pagination)" do
-      page.should not_have_selector('li', Site.last.name)
+      page.should_not have_selector('li', Site.last.name)
     end
 
     it "lists page numbers" do
