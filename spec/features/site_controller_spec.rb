@@ -20,5 +20,9 @@ describe "Site Controller" do
     it "lists page numbers" do
       page.should have_selector('div.pagination')
     end
+    
+    it "links to site_path(:id)" do
+      page.should have_link(Site.first.name, href: site_path(Site.first))
+    end
   end
 end

@@ -1,7 +1,7 @@
 <h1>Sites</h1>
 <ul class="sites">
 	<% @sites.each do |site| %>
-		<li><%= site.name %></li>
+		<li><%= link_to site.name, site_path(site) %></li>
 	<% end %>
 </ul>
 
