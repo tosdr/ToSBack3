@@ -24,5 +24,19 @@ describe "Site Controller" do
     it "links to site_path(:id)" do
       page.should have_link(Site.first.name, href: site_path(Site.first))
     end
-  end
+  end #index
+  
+  describe "site_path(:id)" do
+    let!(:site) { FactoryGirl.create(:site) }
+    
+    before(:each) do
+      visit sites_path(site)
+    end
+    
+    it "should contain the site's title" do
+      page.should have_selector("h1", text: site.name )
+    end
+    
+    it "should list the site's policies"
+  end #show
 end
