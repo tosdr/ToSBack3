@@ -30,7 +30,7 @@ describe "Site Controller" do
     let!(:site) { FactoryGirl.create(:site) }
     
     before(:each) do
-      visit sites_path(site)
+      visit site_path(site)
     end
     
     it "should contain the site's title" do
