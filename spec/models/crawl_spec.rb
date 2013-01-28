@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: crawls
+#
+#  id         :integer          not null, primary key
+#  policy_id  :integer
+#  scrape     :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'spec_helper'
 
 describe Crawl do

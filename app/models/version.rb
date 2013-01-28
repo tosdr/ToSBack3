@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: versions
+#
+#  id             :integer          not null, primary key
+#  policy_id      :integer
+#  previous_crawl :text
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 class Version < ActiveRecord::Base
   belongs_to :policy
   
