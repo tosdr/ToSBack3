@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Site Controller" do
   describe "site_path#index" do
-    before(:all) { 30.times { FactoryGirl.create(:site_sequence) } }
+    before(:all) { 30.times { FactoryGirl.create(:site) } }
     after(:all)  { Site.delete_all }    
     
     before(:each) do

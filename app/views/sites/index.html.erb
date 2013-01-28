@@ -1,2 +1,6 @@
-<h1>Sites#index</h1>
-<p>Find me in app/views/sites/index.html.erb</p>
+<h1>Sites</h1>
+<ul class="sites">
+	<% @sites.each do |site| %>
+		<li><%= link_to site.name, site %></li>
+	<% end %>
+</ul>
