@@ -1,6 +1,8 @@
 <h1>Sites</h1>
 <ul class="sites">
 	<% @sites.each do |site| %>
-		<li><%= link_to site.name, site %></li>
+		<li><%= site.name %></li>
 	<% end %>
 </ul>
+
+<%= will_paginate @sites %>
