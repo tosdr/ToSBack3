@@ -3,8 +3,8 @@
 FactoryGirl.define do
   factory :policy do
     name "Privacy Policy"
-    url "http://www.site.com/privacy"
-    xpath "//div[@id='content']"
+    sequence(:url) { |n| "http://www.example#{n}.com/privacy" }
+    sequence(:xpath) { |n| "//div[@id='content']" }
     lang "EN"
     detail " <p>500px is founded on the principle of helping people discover new photos and photographers.
     We know that you care about how your personal information is used and shared, and we take your privacy very seriously.

@@ -35,10 +35,10 @@ describe Policy do
   end # validates
   
   context "when policy is created" do
-    let!(:uniq) { FactoryGirl.create(:policy) }
-    let(:dup) { FactoryGirl.build(:policy) }
+    let!(:example) { FactoryGirl.create(:policy) }
+    let(:dup) { FactoryGirl.build(:policy, url: example.url, xpath: example.xpath) }
   
-    it "is invalid if it's a duplicate" do
+    it "is invalid if it has duplicate url and xpath" do
       dup.should_not be_valid
     end
     it "is valid if url is duplicate but xpath is different" do
@@ -51,7 +51,7 @@ describe Policy do
     end
     
     it "creates an initial version automatically" do
-      uniq.versions.count.should eq(1)
+      example.versions.count.should eq(1)
     end
   end # when policy is created
 end
