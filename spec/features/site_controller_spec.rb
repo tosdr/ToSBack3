@@ -27,20 +27,32 @@ describe "Site Controller" do
   end #index
   
   describe "site_path(:id)" do
-    let!(:site) { FactoryGirl.create(:site_with_policies) }
-    
     before(:each) do
       visit site_path(site)
     end
     
-    it "should contain the site's title" do
-      page.should have_selector("h1", text: site.name )
-    end
-    
-    it "should list the site's policies" do
-      site.policies.each do |policy|
-        page.should have_selector("li", text: policy.name)
+    context "when site does not have policies" do
+      let!(:site) { FactoryGirl.create(:site) }
+      
+      it "contains the site's title" do
+        page.should have_selector("h1", text: site.name )
       end
-    end
+      
+      it "displays message in place of policies"
+      
+      it "displays a link to add a policy"
+      
+    end # doesn't have policies
+    
+    context "when the site has policies" do
+      let!(:site) { FactoryGirl.create(:site_with_policies) }
+      
+      it "lists the site's policies" do
+        site.policies.each do |policy|
+          page.should have_selector("li", text: policy.name)
+        end
+      end
+      
+    end # has policies
   end #show
 end

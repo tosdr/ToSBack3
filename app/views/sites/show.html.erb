@@ -1,2 +1,9 @@
 <h1><%= @site.name %></h1>
-<p>Add some code to list associated policies :)</p>
+
+<% if @site.policies.any? %>
+<ul class="policies">
+	<% @site.policies.each do |policy| %>
+		<li><%= policy.name %></li>
+	<% end %>
+</ul>
+<% end %>
