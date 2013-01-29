@@ -27,7 +27,7 @@ describe "Site Controller" do
   end #index
   
   describe "site_path(:id)" do
-    let!(:site) { FactoryGirl.create(:site) }
+    let!(:site) { FactoryGirl.create(:site_with_policies) }
     
     before(:each) do
       visit site_path(site)
@@ -37,6 +37,10 @@ describe "Site Controller" do
       page.should have_selector("h1", text: site.name )
     end
     
-    it "should list the site's policies"
+    it "should list the site's policies" do
+      site.policies.each do |policy|
+        page.should have_selector("li", text: policy.name)
+      end
+    end
   end #show
 end
