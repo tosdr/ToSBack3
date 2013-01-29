@@ -53,6 +53,12 @@ describe "Site Controller" do
         end
       end
       
+      it "policy names are links to policy pages" do
+        pending("Policy controller and views need to be implemented")
+        click_link site.policies.first.name
+        page.should have_selector("h1", site.policies.first.name )
+      end
+      
     end # has policies
   end #show
 end
