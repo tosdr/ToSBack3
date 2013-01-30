@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :policy do
-    name "Privacy Policy"
+    sequence(:name) { |n| "Privacy Policy #{n}" }
     sequence(:url) { |n| "http://www.example#{n}.com/privacy" }
-    sequence(:xpath) { |n| "//div[@id='content']" }
+    sequence(:xpath) { |n| "//div[@id='content_#{n}']" }
     lang "EN"
     detail " <p>500px is founded on the principle of helping people discover new photos and photographers.
     We know that you care about how your personal information is used and shared, and we take your privacy very seriously.
@@ -15,5 +15,6 @@ FactoryGirl.define do
     This information allows us to provide you with a customized and efficient experience.
     We collect the following types of information from our 500px users:<br>
     <br>"
+    needs_revision false
   end
 end
