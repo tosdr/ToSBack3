@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130122222453) do
+ActiveRecord::Schema.define(:version => 20130130183836) do
 
   create_table "commitments", :force => true do |t|
     t.integer  "policy_id"
@@ -33,8 +33,9 @@ ActiveRecord::Schema.define(:version => 20130122222453) do
     t.string   "xpath"
     t.string   "lang"
     t.text     "detail"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.boolean  "needs_revision"
   end
 
   create_table "sites", :force => true do |t|

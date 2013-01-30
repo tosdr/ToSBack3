@@ -2,14 +2,15 @@
 #
 # Table name: policies
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  url        :string(255)
-#  xpath      :string(255)
-#  lang       :string(255)
-#  detail     :text
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id             :integer          not null, primary key
+#  name           :string(255)
+#  url            :string(255)
+#  xpath          :string(255)
+#  lang           :string(255)
+#  detail         :text
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  needs_revision :boolean
 #
 
 class Policy < ActiveRecord::Base
