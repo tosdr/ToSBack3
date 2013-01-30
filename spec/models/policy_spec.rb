@@ -35,7 +35,7 @@ describe Policy do
     end
   end # validates
   
-  context "when policy is created" do
+  describe "when policy is created" do
     let!(:example) { FactoryGirl.create(:policy) }
     let(:dup) { FactoryGirl.build(:policy, url: example.url, xpath: example.xpath) }
   
@@ -55,4 +55,16 @@ describe Policy do
       example.versions.count.should eq(1)
     end
   end # when policy is created
+  
+  describe "when policy.new_version('new policy',created_at) is called" do
+    let!(:example) { FactoryGirl.create(:policy) }
+    before(:all) { example.new_version("Our privacy statement applies to... ", 1.day.ago )}
+    
+    it "creates a new row in the versions table representing the current version"
+    
+    it "stores the version passed to the method as a policy attribute"
+    
+    it "moves the old version into the older row in the versions table"
+    
+  end
 end
