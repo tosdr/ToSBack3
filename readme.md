@@ -6,7 +6,7 @@
 
 ### What is ToSBack?
 
-Copied from the [old about page][3]:
+Copy/paste from the [old about page][3]:
 
 Terms-Of-Service and other website policies form the foundation of your relationship with social networking sites, online businesses, and other Internet communities. But most people become aware of these terms only when there's a problem. TOSBack was created to help you monitor the policies for the websites you use everyday, and show how they change over time.
 
