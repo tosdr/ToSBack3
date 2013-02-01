@@ -16,13 +16,12 @@
 require 'spec_helper'
 
 describe Policy do
-  # pending "add some examples to (or delete) #{__FILE__}"
   it "has a valid factory" do
-    FactoryGirl.create(:policy).should be_valid
+    FactoryGirl.build(:policy).should be_valid
   end
   
-  let!(:example) { FactoryGirl.create(:policy) }
-  
+  let(:example) { FactoryGirl.create(:policy) }
+    
   it { should respond_to(:sites) }
   it { should respond_to(:commitments) }
   it { should respond_to(:versions) }
@@ -58,42 +57,50 @@ describe Policy do
   end # when policy is dup
   
   describe "updating a policy" do
+    before (:all) { @modified = FactoryGirl.create(:policy) }
+    after (:all) {Policy.destroy_all}
+    
     context "when policy name is changed" do
-      before (:each) { example.name = "something new" }
+      before (:all) { @modified.name = "some new policy name"}
       
       it "needs_new_version? returns false" do
-        example.send(:needs_new_version?).should eq(false)
+        @modified.send(:needs_new_version?).should eq(false)
       end
       
       it "doesn't add a new version when saved" do
-        expect{example.save}.to_not change{example.versions.count}.by(1)
+        expect{@modified.save}.to_not change{@modified.versions.count}.by(1)
       end
     end
     
     context "when policy detail is changed" do
-      before (:each) { example.detail = "new crawl" }
+      before (:all) { @modified.detail = "new crawl" }
       
       it "needs_new_version? returns true" do
-        example.send(:needs_new_version?).should eq(true)
+        @modified.send(:needs_new_version?).should eq(true)
       end
       
-      context "and policy is saved" do
-        before (:all) do 
-          @old_data = example.detail_was
-          example.save
+      context "and policy detail is saved" do
+        before (:all) do
+          @old_crawl = @modified.detail_was
+          @modified.save
         end
       
-        it "adds a new version when saved" do
-          example.versions.count.should eq(2)
+        it "isn't dirty" do
+          @modified.changed?.should eq(false)
+        end
+      
+        it "adds a new version" do
+          @modified.versions.count.should eq(2)
         end
       
         specify "second to last version equals old policy detail" do
-          example.versions[-2].previous_crawl.should eq(@old_data)
+          @modified.versions[-2].previous_crawl.should eq(@old_crawl)
         end
       
         specify "most recent version represents current version" do
-          example.versions.last.previous_crawl.should eq("Current Version")
+          @modified.versions.last.previous_crawl.should eq("Current Version")
         end
+        
       end # policy is saved
     end 
     

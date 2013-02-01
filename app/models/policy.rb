@@ -25,7 +25,11 @@ class Policy < ActiveRecord::Base
   validates :xpath, uniqueness: {:scope => :url}
   
   after_create do |p|
-    p.versions.create(previous_crawl: "Current Version")
+    p.update_current_version
+  end
+  
+  before_update do |p|
+    p.update_current_version if p.needs_new_version?
   end
   
   protected
@@ -33,8 +37,7 @@ class Policy < ActiveRecord::Base
   def update_current_version
     unless versions.empty?
       old_version = versions.last
-      old_version.previous_crawl = detail_was
-      old_version.save
+      old_version.update_attributes(previous_crawl: detail_was)
     end
       
     versions.create(previous_crawl: "Current Version")
