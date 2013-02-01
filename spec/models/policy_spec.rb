@@ -21,12 +21,18 @@ describe Policy do
     FactoryGirl.create(:policy).should be_valid
   end
   
+  let!(:example) { FactoryGirl.create(:policy) }
+  
   it { should respond_to(:sites) }
   it { should respond_to(:commitments) }
   it { should respond_to(:versions) }
   it { should respond_to(:crawl) }
   
-  describe "#validates" do
+  it "creates an initial version automatically" do
+    example.versions.count.should eq(1)
+  end
+  
+  describe "#validates presence" do
     it "is invalid without a name" do
       FactoryGirl.build(:policy, name: nil).should_not be_valid
     end 
@@ -35,8 +41,7 @@ describe Policy do
     end
   end # validates
   
-  describe "when policy is created" do
-    let!(:example) { FactoryGirl.create(:policy) }
+  describe "creating duplicate policy" do
     let(:dup) { FactoryGirl.build(:policy, url: example.url, xpath: example.xpath) }
   
     it "is invalid if it has duplicate url and xpath" do
@@ -50,21 +55,23 @@ describe Policy do
       dup.url = "http://ex.com/terms"
       dup.should be_valid
     end
-    
-    it "creates an initial version automatically" do
-      example.versions.count.should eq(1)
-    end
-  end # when policy is created
+  end # when policy is dup
   
-  describe "when policy.new_version('new policy',created_at) is called" do
-    let!(:example) { FactoryGirl.create(:policy) }
-    before(:all) { example.new_version("Our privacy statement applies to... ", 1.day.ago )}
+  describe "#needs_new_version?" do
+    context "when policy name is changed" do
+      before (:each) { example.name = "something new" }
+      
+      it "returns false" do
+        example.send(:needs_new_version?).should eq(false)
+      end
+    end
     
-    it "creates a new row in the versions table representing the current version"
-    
-    it "stores the version passed to the method as a policy attribute"
-    
-    it "moves the old version into the older row in the versions table"
-    
+    context "when policy detail is changed" do
+      before (:each) { example.detail = "new crawl" }
+      
+      it "returns true" do
+        example.send(:needs_new_version?).should eq(true)
+      end
+    end
   end
 end

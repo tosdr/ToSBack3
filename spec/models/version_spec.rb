@@ -31,4 +31,12 @@ describe Version do
       version.should_not be_valid
     end
   end
+  
+  describe "#new_version_for(policy_id)" do
+    it "creates a new row in the versions table representing the current version"
+  
+    it "stores the version passed to the method as a policy attribute"
+  
+    it "moves the old version into the older row in the versions table"
+  end
 end

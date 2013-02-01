@@ -27,4 +27,10 @@ class Policy < ActiveRecord::Base
   after_create do |p|
     p.versions.create(previous_crawl: "Current Version")
   end
+  
+  protected
+  
+  def needs_new_version?
+    
+  end
 end

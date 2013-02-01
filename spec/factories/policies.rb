@@ -15,6 +15,6 @@ FactoryGirl.define do
     This information allows us to provide you with a customized and efficient experience.
     We collect the following types of information from our 500px users:<br>
     <br>"
-    needs_revision false
+    needs_revision true
   end
 end
