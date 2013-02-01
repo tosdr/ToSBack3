@@ -30,6 +30,16 @@ class Policy < ActiveRecord::Base
   
   protected
   
+  def update_current_version
+    unless versions.empty?
+      old_version = versions.last
+      old_version.previous_crawl = detail_was
+      old_version.save
+    end
+      
+    versions.create(previous_crawl: "Current Version")
+  end
+  
   def needs_new_version?
     detail_changed?
   end

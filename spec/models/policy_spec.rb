@@ -57,21 +57,45 @@ describe Policy do
     end
   end # when policy is dup
   
-  describe "#needs_new_version?" do
+  describe "updating a policy" do
     context "when policy name is changed" do
       before (:each) { example.name = "something new" }
       
-      it "returns false" do
+      it "needs_new_version? returns false" do
         example.send(:needs_new_version?).should eq(false)
+      end
+      
+      it "doesn't add a new version when saved" do
+        expect{example.save}.to_not change{example.versions.count}.by(1)
       end
     end
     
     context "when policy detail is changed" do
       before (:each) { example.detail = "new crawl" }
       
-      it "returns true" do
+      it "needs_new_version? returns true" do
         example.send(:needs_new_version?).should eq(true)
       end
-    end
-  end
+      
+      context "and policy is saved" do
+        before (:all) do 
+          @old_data = example.detail_was
+          example.save
+        end
+      
+        it "adds a new version when saved" do
+          example.versions.count.should eq(2)
+        end
+      
+        specify "second to last version equals old policy detail" do
+          example.versions[-2].previous_crawl.should eq(@old_data)
+        end
+      
+        specify "most recent version represents current version" do
+          example.versions.last.previous_crawl.should eq("Current Version")
+        end
+      end # policy is saved
+    end 
+    
+  end # updating a policy
 end
