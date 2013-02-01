@@ -31,6 +31,6 @@ class Policy < ActiveRecord::Base
   protected
   
   def needs_new_version?
-    
+    detail_changed?
   end
 end
