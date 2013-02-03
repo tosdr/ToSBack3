@@ -3,7 +3,7 @@
 <% if @site.policies.any? %>
 <ul class="policies">
 	<% @site.policies.each do |policy| %>
-		<li><%= policy.name %></li>
+		<li><%= link_to policy.name, policy_path(policy) %></li>
 	<% end %>
 </ul>
 <% end %>
