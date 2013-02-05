@@ -16,6 +16,8 @@
 class Policy < ActiveRecord::Base
   has_many :commitments
   has_many :sites, through: :commitments
+  has_many :subscriptions
+  has_many :users, through: :subscriptions
   has_many :versions
   has_one :crawl
   

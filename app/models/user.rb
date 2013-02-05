@@ -11,6 +11,9 @@
 #
 
 class User < ActiveRecord::Base
+  has_many :subscriptions
+  has_many :policies, through: :subscriptions
+  
   attr_accessible :email, :name
   
   validates :name, :email, presence: true

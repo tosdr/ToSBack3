@@ -26,11 +26,11 @@ describe Subscription do
       end
       
       it "is valid if user_id is unique and policy_id exists" do
-        FactoryGirl.build(:subscription, policy_id: @existing_subscription.policy_id).should be_valid
+        FactoryGirl.build(:subscription, policy_id: @existing_subscription.policy_id, user_id: 25).should be_valid
       end
       
       it "is valid if policy_id is unique and user_id exists" do
-        FactoryGirl.build(:subscription, user_id: @existing_subscription.user_id).should be_valid
+        FactoryGirl.build(:subscription, user_id: @existing_subscription.user_id, policy_id: 25).should be_valid
       end
     end
   end #validates
