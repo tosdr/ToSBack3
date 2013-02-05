@@ -11,5 +11,8 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :admin, :email, :name
+  attr_accessible :email, :name
+  
+  validates :name, :email, presence: true
+  validates :email, uniqueness: true
 end
