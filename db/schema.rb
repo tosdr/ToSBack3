@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130130183836) do
+ActiveRecord::Schema.define(:version => 20130205164614) do
 
   create_table "commitments", :force => true do |t|
     t.integer  "policy_id"
@@ -40,6 +40,14 @@ ActiveRecord::Schema.define(:version => 20130130183836) do
 
   create_table "sites", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.boolean  "admin"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
