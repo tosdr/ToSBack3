@@ -16,6 +16,9 @@ describe User do
   it "has a valid factory" do
     FactoryGirl.build(:user).should be_valid
   end
+  
+  it { should respond_to(:subscriptions) }
+  it { should respond_to(:policies) }
       
   describe "#validates" do
      it "is invalid without a name" do

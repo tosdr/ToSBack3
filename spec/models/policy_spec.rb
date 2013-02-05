@@ -26,6 +26,8 @@ describe Policy do
   it { should respond_to(:commitments) }
   it { should respond_to(:versions) }
   it { should respond_to(:crawl) }
+  it { should respond_to(:subscriptions) }
+  it { should respond_to(:users) }
   
   it "creates an initial version automatically" do
     example.versions.count.should eq(1)
