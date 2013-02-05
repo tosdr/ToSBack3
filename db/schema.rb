@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130205164614) do
+ActiveRecord::Schema.define(:version => 20130205173331) do
 
   create_table "commitments", :force => true do |t|
     t.integer  "policy_id"
@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(:version => 20130205164614) do
 
   create_table "sites", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "policy_id"
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
