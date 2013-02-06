@@ -15,10 +15,14 @@ class User < ActiveRecord::Base
   has_many :subscriptions
   has_many :policies, through: :subscriptions
   
-  attr_accessible :email, :name
+  has_secure_password
   
-  validates :name, :email, presence: true
-  validates :email, uniqueness: true
+  attr_accessible :email, :name, :password, :password_confirmation
+  
+  VALID_EMAIL_REGEX = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
+  validates :name, :email, presence: true, length: {maximum: 50}
+  validates :email, presence: true, format: {with: VALID_EMAIL_REGEX}, uniqueness: {case_sensitive: false}
+  validates :password, presence: true, length: {minimum: 8}
   
   before_save { |user| user.email = email.downcase }
     
