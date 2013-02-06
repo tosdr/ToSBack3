@@ -2,12 +2,13 @@
 #
 # Table name: users
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  email      :string(255)
-#  admin      :boolean
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  admin           :boolean
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string(255)
 #
 
 require 'spec_helper'
@@ -19,6 +20,7 @@ describe User do
   
   it { should respond_to(:subscriptions) }
   it { should respond_to(:policies) }
+  it { should respond_to(:password_digest) }
       
   describe "#validates" do
      it "is invalid without a name" do
@@ -29,7 +31,7 @@ describe User do
        FactoryGirl.build(:user, email: nil).should_not be_valid
      end
      
-     context "when user exists in database" do
+     context "when user already exists in database, new user" do
        before(:all) { @existing = FactoryGirl.create(:user) }
        after(:all) { User.destroy_all }
        
