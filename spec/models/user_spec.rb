@@ -44,4 +44,12 @@ describe User do
        end
      end
    end # validates
+   
+   describe "saving a user" do
+     before { @user = FactoryGirl.create(:user, email: "ALLCAPS@CAPSLOCK.COM") }
+     
+     specify "email should be downcased before saving" do
+       @user.email.should eq("allcaps@capslock.com")
+     end
+   end
 end

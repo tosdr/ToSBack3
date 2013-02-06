@@ -19,4 +19,7 @@ class User < ActiveRecord::Base
   
   validates :name, :email, presence: true
   validates :email, uniqueness: true
+  
+  before_save { |user| user.email = email.downcase }
+    
 end
