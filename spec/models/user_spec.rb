@@ -21,6 +21,7 @@ describe User do
   it { should respond_to(:subscriptions) }
   it { should respond_to(:policies) }
   it { should respond_to(:password_digest) }
+  it { should respond_to(:authenticate) }
       
   describe "#validates" do
      it "is invalid without a name" do
@@ -28,7 +29,19 @@ describe User do
      end
      
      it "is invalid without a email address" do
-       FactoryGirl.build(:user, email: nil).should_not be_valid
+       FactoryGirl.build(:user, email: "      ").should_not be_valid
+     end
+     
+     it "is invalid without a password" do
+       FactoryGirl.build(:user, password: "  ").should_not be_valid
+     end
+     
+     it "is invalid if the password confirmation doesn't match" do
+       FactoryGirl.build(:user, password_confirmation: "mismatched").should_not be_valid
+     end
+     
+     it "is invalid if the password is too short" do
+       FactoryGirl.build(:user, password: "e" * 5).should_not be_valid
      end
      
      context "when user already exists in database, new user" do
