@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130206150453) do
+ActiveRecord::Schema.define(:version => 20130206154837) do
 
   create_table "commitments", :force => true do |t|
     t.integer  "policy_id"
@@ -59,6 +59,8 @@ ActiveRecord::Schema.define(:version => 20130206150453) do
     t.datetime "updated_at",      :null => false
     t.string   "password_digest"
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
   create_table "versions", :force => true do |t|
     t.integer  "policy_id"
