@@ -1,11 +1,13 @@
 require 'spec_helper'
 
-describe "SessionsControllers" do
-  describe "GET /sessions_controllers" do
-    it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      get sessions_controllers_path
-      response.status.should be(200)
-    end
+describe "SessionsController" do
+  subject { page }
+  
+  describe "visiting signin_path" do
+    before { visit signin_path }
+    
+    it { should have_button("Sign In") }
+    it { should have_button("Create") }
+
   end
 end
