@@ -6,13 +6,14 @@ describe "SessionsController" do
   describe "visiting signin_path" do
     before { visit signin_path }
 
-    it { should have_selector('h2', text: "Sign In:") }    
-    it { should have_button("Sign In") }
+    it { should have_selector('h2', text: "Sign in") }
+    it { should have_selector('h2', text: "sign up")}
+    it { should have_button("Sign in") }
     it { should have_button("Create") }
     
     describe "signing in" do
       before (:all) { @user = FactoryGirl.create(:user) }
-      after (:all) { User.destroy_all }
+      after (:all) { @user.destroy }
       
       context "when login info is invalid" do
         before { click_button "Sign in"}
@@ -28,7 +29,7 @@ describe "SessionsController" do
           click_button "Sign in"
         end
 
-        it { should have_selector('title', text: @user.name) }
+        it { should have_selector('h2', text: @user.name) }
         it { should have_link('Sign out', href: signout_path) }
         it { should_not have_link('Sign in', href: signin_path) }
         
