@@ -3,10 +3,10 @@
 		<h2>Sign in</h2>
 		<%= form_tag sessions_path do %>
 		  <%= label_tag :email %>  
-		  <%= text_field_tag :email, params[:email] %>
+		  <%= text_field_tag :email, params[:email], id: "login_email" %>
 
 		  <%= label_tag :password %>  
-		  <%= password_field_tag :password %>
+		  <%= password_field_tag :password, nil, id: "login_password" %>
 
 		  <%= submit_tag "Sign in", class: "btn btn-large" %>  
 		<% end %>
