@@ -5,7 +5,7 @@ Tosback3::Application.routes.draw do
   resources :users, only: [:new, :create]
   
   #comment these in as we add tests:
-  # match '/signup',  to: 'users#new'
+  match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
   # match '/signout', to: 'sessions#destroy', via: :delete  
   

@@ -9,7 +9,6 @@ describe "SessionsController" do
     it { should have_selector('h2', text: "Sign in") }
     it { should have_selector('h2', text: "sign up")}
     it { should have_button("Sign in") }
-    it { should have_button("Create") }
     
     describe "signing in" do
       before (:all) { @user = FactoryGirl.create(:user) }
