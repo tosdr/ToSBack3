@@ -19,6 +19,12 @@ describe "SessionsController" do
         
         it { should have_selector('div.alert.alert-error', text: 'invalid') }
         
+        context "when visiting another page after a login failure" do
+          before { click_link "sign up"}
+          
+          it { should_not have_selector('div.alert.alert-error', text: 'invalid') }
+        end
+        
       end #invalid login info
       
       context "when login info is valid" do        
