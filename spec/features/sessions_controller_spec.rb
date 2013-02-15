@@ -7,7 +7,7 @@ describe "SessionsController" do
     before { visit signin_path }
 
     it { should have_selector('h2', text: "Sign in") }
-    it { should have_selector('h2', text: "sign up")}
+    it { should have_link('sign up', href: signup_path) }
     it { should have_button("Sign in") }
     
     describe "signing in" do
@@ -17,7 +17,7 @@ describe "SessionsController" do
       context "when login info is invalid" do
         before { click_button "Sign in"}
         
-        it { should have_selector('div.alert.alert-error', text: 'Invalid') }
+        it { should have_selector('div.alert.alert-error', text: 'invalid') }
         
       end #invalid login info
       
