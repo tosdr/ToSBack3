@@ -1,13 +1,17 @@
 Tosback3::Application.routes.draw do
+  root to: 'policies#index'
+  
   resources :policies, only: [:index, :show]
   resources :sites, only: [:index, :show]
-  resources :sessions, only: [:new, :create, :destroy]
+  # resources :sessions, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create, :show]
   
-  #comment these in as we add tests:
-  match '/signup',  to: 'users#new'
-  match '/signin',  to: 'sessions#new'
-  # match '/signout', to: 'sessions#destroy', via: :delete  
+  #comment these in as we add tests:  
+  get '/signup',  to: 'users#new', as: 'signup'
+  post '/signup',  to: 'users#create', as: 'signup'
+  get '/signin',  to: 'sessions#new', as: 'signin'
+  post '/signin',  to: 'sessions#create', as: 'signin'
+  match '/signout', to: 'sessions#destroy', via: :delete, as: 'signout'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

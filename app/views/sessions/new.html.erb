@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="offset3 span6">
 		<h2>Sign in</h2>
-		<%= form_tag sessions_path do %>
+		<%= form_tag signin_path do %>
 		  <%= label_tag :email %>  
 		  <%= text_field_tag :email, params[:email], id: "login_email" %>
 

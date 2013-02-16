@@ -19,6 +19,10 @@ describe "SessionsController" do
         
         it { should have_selector('div.alert.alert-error', text: 'invalid') }
         
+        it "url remains at /signin instead of /sessions" do
+          current_path.should eq(signin_path)
+        end
+        
         context "when visiting another page after a login failure" do
           before { click_link "sign up"}
           
