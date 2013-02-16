@@ -43,6 +43,14 @@ describe "SessionsController" do
         it { should have_link('Sign out', href: signout_path) }
         it { should_not have_link('Sign in', href: signin_path) }
         
+        context "clicking sign out" do
+          before { click_link "Sign out" }
+          
+          it { should have_selector('div.alert.alert-notice', text: 'signed out') }
+          it { should_not have_link('Sign out', href: signout_path) }
+          it { should have_link('Sign in', href: signin_path) }
+        end
+        
       end #valid login
     end #signing in
     

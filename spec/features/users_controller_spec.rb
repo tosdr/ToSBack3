@@ -11,7 +11,7 @@ describe "UsersController" do
     describe "signing up" do
       context "with valid info" do
         pending "creates a new user"
-        pending "redirects"
+        pending "automatically signs in user"
       end
       
       context "with invalid user info" do
