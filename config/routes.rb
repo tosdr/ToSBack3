@@ -2,7 +2,7 @@ Tosback3::Application.routes.draw do
   resources :policies, only: [:index, :show]
   resources :sites, only: [:index, :show]
   resources :sessions, only: [:new, :create, :destroy]
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :show]
   
   #comment these in as we add tests:
   match '/signup',  to: 'users#new'

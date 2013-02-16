@@ -34,6 +34,7 @@ describe "SessionsController" do
           click_button "Sign in"
         end
 
+        it { should have_selector('div.alert.alert-notice', text: 'signed in') }
         it { should have_selector('h2', text: @user.name) }
         it { should have_link('Sign out', href: signout_path) }
         it { should_not have_link('Sign in', href: signin_path) }
