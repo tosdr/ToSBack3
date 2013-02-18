@@ -1,15 +1,16 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.10'
+gem 'rails', '~> 3.2.12'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
-gem 'mechanize'
-gem 'sanitize'
-gem 'nokogiri'
-gem 'will_paginate', '~> 3.0'
+gem 'sqlite3', '~> 1.3.7'
+gem 'mechanize', '~> 2.5.1'
+gem 'sanitize', '~> 2.0.3'
+gem 'nokogiri', '~> 1.5.6'
+gem 'will_paginate', '~> 3.0.4'
+gem "json", "~> 1.7.7"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -25,12 +26,12 @@ end
 
 
 group :development, :test do
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
+  gem 'rspec-rails', '~> 2.12.2'
+  gem 'factory_girl_rails', '~> 4.2.1'
 end
 
 group :development do
-  gem 'annotate', ">=2.5.0"
+  gem 'annotate', "~> 2.5.0"
 end
 
 gem 'jquery-rails'
@@ -39,7 +40,7 @@ gem 'jquery-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
 
 group :test do
-  gem 'capybara'
+  gem 'capybara', '~> 2.0.2'
 end
 
 # To use Jbuilder templates for JSON
