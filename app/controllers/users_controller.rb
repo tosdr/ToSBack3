@@ -6,7 +6,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      
+      flash[:success] = "Welcome to TOSBack!"
+      sign_in @user
+      redirect_to user_path(@user)
     else
       render :new
     end
