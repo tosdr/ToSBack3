@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tosback3</title>
+  <title>TOSBack</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -9,8 +9,12 @@
 <body>
 <%= render 'layouts/header' %>
 
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>"><%= value %></div>
+<% if flash.any? %>
+	<div class="container" id="flash">
+	<% flash.each do |key, value| %>
+	  <div class="alert alert-<%= key %>"><%= value %></div>
+	<% end %>
+	</div>
 <% end %>
 
 <div class="container" id="main">
