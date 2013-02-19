@@ -1,5 +1,6 @@
 <div class="offset3 span6">
 	<h2>Sign up!</h2>
+	<%= render 'shared/errors', error_object: @user %>
 	<%= form_for(@user) do |f| %>
 	  <%= render 'user_form', f: f %>
       <%= f.submit "Create account", class: "btn btn-large" %>

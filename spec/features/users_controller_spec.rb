@@ -36,9 +36,7 @@ describe "UsersController" do
           click_button "Create"
         end
         
-        it "displays user.errors" do
-          it { should have_selector('div.alert.alert-error', text: 'error') }
-        end
+        it { should have_selector('div.alert.alert-error', text: 'error') }
       end #with invalid info
       
     end #signing up
