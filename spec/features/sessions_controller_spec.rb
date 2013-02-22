@@ -33,9 +33,7 @@ describe "SessionsController" do
       
       context "when login info is valid" do        
         before do
-          fill_in "login_email",    with: @user.email.upcase
-          fill_in "login_password", with: @user.password
-          click_button "Sign in"
+          sign_in @user
         end
 
         it { should have_selector('div.alert.alert-success', text: 'signed in') }
