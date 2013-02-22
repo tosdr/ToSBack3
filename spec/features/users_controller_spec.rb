@@ -38,9 +38,38 @@ describe "UsersController" do
         
         it { should have_selector('div.alert.alert-error', text: 'error') }
       end #with invalid info
-      
     end #signing up
-    
   end #visiting signup_path
+
+  describe "editing account info" do
+    before do
+      @user = FactoryGirl.create(:user)
+      sign_in @user
+      visit edit_user_path(@user)
+    end
+    
+    context "with valid information" do
+      let(:new_name)  { "New Name" }
+      let(:new_email) { "new@example.com" }
+      before do
+        fill_in "user_name",             with: new_name
+        fill_in "user_email",            with: new_email
+        fill_in "user_password",         with: @user.password
+        fill_in "user_password_confirmation", with: @user.password
+        click_button "Save"
+      end
+
+      it { should have_selector('div.alert.alert-success', text: 'saved') }
+      specify { @user.reload.name.should  == new_name }
+      specify { @user.reload.email.should == new_email }
+      
+    end # with valid info
+
+    context "with invalid information" do
+      before { click_button "Save" }
+      
+      it { should have_selector('div.alert.alert-error', text: 'Sorry') }
+    end #with invalid information
+  end #editing account  
   
 end
