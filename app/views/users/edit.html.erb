@@ -1,0 +1,8 @@
+<div class="offset3 span6">
+	<h2>Edit your account:</h2>
+	<%= render 'shared/errors', error_object: @user %>
+	<%= form_for(@user) do |f| %>
+	  <%= render 'user_form', f: f %>
+      <%= f.submit "Save changes", class: "btn btn-large" %>
+    <% end %>
+</div>

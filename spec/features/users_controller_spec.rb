@@ -42,7 +42,7 @@ describe "UsersController" do
   end #visiting signup_path
 
   describe "editing account info" do
-    before do
+    before (:each) do
       @user = FactoryGirl.create(:user)
       sign_in @user
       visit edit_user_path(@user)
@@ -68,7 +68,7 @@ describe "UsersController" do
     context "with invalid information" do
       before { click_button "Save" }
       
-      it { should have_selector('div.alert.alert-error', text: 'Sorry') }
+      it { should have_selector('div.alert.alert-error', text: 'error') }
     end #with invalid information
   end #editing account  
   
