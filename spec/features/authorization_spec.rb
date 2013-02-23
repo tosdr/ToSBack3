@@ -29,7 +29,7 @@ describe "Authorization" do
         it { should have_selector('h2', text: "Edit") }
       end
       
-      context "doing someting unauthorized" do
+      context "doing something unauthorized" do
         before { @otheruser = FactoryGirl.create(:user, email: "other@other.com") }
         
         context "visiting another user's settings" do
@@ -39,11 +39,18 @@ describe "Authorization" do
             current_path.should eq(root_path)
           end
         end # visiting another user's settings
-      
+        
         context "trying to update the wrong user" do
-          before { put user_path(@otheruser) }        
+          let(:user_attrs) { FactoryGirl.attributes_for(:user, email: "test@test.com").except!(:admin) } # Can't mass-assign protected attributes: admin
+          it "doesn't update via 'put' request" do
+            expect{ put "/users/#{@otheruser.id}", id: @otheruser.id, user: user_attrs }.to_not change{@otheruser.reload.email}.from("other@other.com").to("test@test.com")
+            
+            # long version:
+            # put "/users/#{@otheruser.id}", id: @otheruser.id, user: user_attrs
+            # @otheruser.reload
+            # @otheruser.email.should_not eq(user_attrs[:email])
+          end
           
-          specify { response.should redirect_to(root_path) }
         end #trying to update the wrong user
 
       end # doing something unauthorized

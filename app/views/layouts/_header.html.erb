@@ -4,7 +4,7 @@
       <%= link_to "TOSBack", root_path, class: "brand" %>
       <nav>
         <ul class="nav pull-right">
-          <% if current_user %>
+          <% if signed_in? %>
             <li><%= link_to "Account", user_path(current_user) %></li>
             <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
           <% else %>
