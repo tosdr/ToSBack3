@@ -27,7 +27,7 @@ describe "UsersController" do
         end
 
         it { should have_selector('div.alert.alert-success', text: 'Welcome') }
-        it { should have_link('Sign out', href: signout_path) }
+        it_behaves_like "signed in header links"
       end
       
       context "with invalid user info" do
