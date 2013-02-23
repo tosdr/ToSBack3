@@ -27,7 +27,10 @@ describe "UsersController" do
         end
 
         it { should have_selector('div.alert.alert-success', text: 'Welcome') }
-        it_behaves_like "signed in header links"
+        
+        it_behaves_like "it has signed in header links" do
+          let(:user_id) { User.last.id }
+        end
       end
       
       context "with invalid user info" do

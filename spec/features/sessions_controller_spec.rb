@@ -38,13 +38,16 @@ describe "SessionsController" do
 
         it { should have_selector('div.alert.alert-success', text: 'signed in') }
         it { should have_selector('h2', text: @user.name) }
-        it_behaves_like "signed in header links" # in partials_spec.rb
+        
+        it_behaves_like "it has signed in header links" do  # in partials_spec.rb
+          let(:user_id) {@user.id}
+        end
         
         context "clicking sign out" do
           before { click_link "Sign out" }
           
           it { should have_selector('div.alert.alert-success', text: 'signed out') }
-          it_behaves_like "signed out header links"
+          it_behaves_like "it has signed out header links"
         end
         
       end #valid login
