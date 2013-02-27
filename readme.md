@@ -1,7 +1,7 @@
 [1]: https://www.eff.org/deeplinks/2013/01/campus-party-hackathon-making-rule-contribution-tosback "Contributing Rules to ToSBack"
 [2]: https://www.eff.org/deeplinks/2013/01/campus-party-brazil-hackathon-liberty-enhancing-tech-project-tosback "Campus Party Hackathon"
 [3]: http://www.tosback.org/about.php "The old version of ToSBack"
-[4]: https://github.com/didnotread/ToSBack3/wiki/Help-Us-Develop-the-New-ToSBack! "Help us develop ToSBack!"
+[4]: https://github.com/tosdr/ToSBack3/wiki/Help-Us-Develop-the-New-ToSBack! "Help us develop ToSBack!"
 [5]: http://gun.io/blog/how-to-github-fork-branch-and-pull-request/ "How to branch and submit a pull request"
 
 ### What is ToSBack?
