@@ -16,5 +16,16 @@ FactoryGirl.define do
     We collect the following types of information from our 500px users:<br>
     <br>"
     needs_revision true
+    
+    factory :policy_with_sites do
+      ignore do
+        sites_count 5
+      end
+      
+      after(:create) do |policy, eval|
+        eval.sites_count.times { policy.sites << FactoryGirl.create(:site) }
+      end
+    end #with_sites
+    
   end
 end
