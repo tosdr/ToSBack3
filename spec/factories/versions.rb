@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :version do
-    policy_id 1
     sequence(:previous_crawl) { |n| "Crawl Data #{n}" }
+    policy
   end
 end

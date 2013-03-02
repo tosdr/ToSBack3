@@ -31,7 +31,7 @@ describe "PoliciesController" do
   
   describe "visiting #show" do
     before do
-      @policy = FactoryGirl.create(:policy_with_sites)
+      @policy = FactoryGirl.create(:policy_with_sites_and_versions)
       visit policy_path(@policy)
     end
     
@@ -42,7 +42,7 @@ describe "PoliciesController" do
       end
     end
     
-    it { should have_selector('h2', text: @policy.name) }
+    it { should have_selector('h1', text: @policy.name) }
         
   end
 end

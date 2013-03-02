@@ -17,13 +17,15 @@ FactoryGirl.define do
     <br>"
     needs_revision true
     
-    factory :policy_with_sites do
+    factory :policy_with_sites_and_versions do
       ignore do
         sites_count 5
+        versions_count 5
       end
       
       after(:create) do |policy, eval|
         eval.sites_count.times { policy.sites << FactoryGirl.create(:site) }
+        eval.versions_count.times { FactoryGirl.create(:version, policy: policy) }        
       end
     end #with_sites
     
