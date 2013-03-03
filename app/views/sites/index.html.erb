@@ -1,8 +1,4 @@
 <h1>Sites</h1>
-<ul class="sites">
-	<% @sites.each do |site| %>
-		<li><%= link_to site.name, site_path(site) %></li>
-	<% end %>
-</ul>
+<%= render 'shared/list_each_as_link', list_object: @sites, ul_class: "sites" %>
 
 <%= will_paginate @sites %>

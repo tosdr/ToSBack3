@@ -1,8 +1,4 @@
 <h1>Policies</h1>
-<ul class="policies">
-	<% @policies.each do |policy| %>
-		<li><%= link_to policy.name, policy_path(policy) %></li>
-	<% end %>
-</ul>
+<%= render 'shared/list_each_as_link', list_object: @policies, ul_class: "policies" %>
 
 <%= will_paginate @policies %>
