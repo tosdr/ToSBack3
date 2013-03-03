@@ -30,19 +30,23 @@ describe "PoliciesController" do
   end # policies_path#index
   
   describe "visiting #show" do
-    before do
-      @policy = FactoryGirl.create(:policy_with_sites_and_versions)
-      visit policy_path(@policy)
-    end
-    
-    it "has links to the sites the policy belongs to" do
-      @policy.sites.each do |site|
-        page.should have_link(site.name, href: site_path(site.id))
-        page.should have_selector('li', text: site.name)
+
+    context "when policy has many versions" do
+      before do
+        @policy = FactoryGirl.create(:policy_with_sites_and_versions)
+        visit policy_path(@policy)
       end
-    end
-    
-    it { should have_selector('h1', text: @policy.name) }
+      
+      it "has links to the sites using the policy" do
+        @policy.sites.each do |site|
+          page.should have_link(site.name, href: site_path(site.id))
+          page.should have_selector('li', text: site.name)
+        end
+      end
+      
+      it { should have_selector('h1', text: @policy.name) }
+      it { should have_selector('h3', text: @policy.updated_at.to_date.strftime("%B %-d, %Y")) }
+    end #many versions
         
-  end
+  end #visiting #show
 end

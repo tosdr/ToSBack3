@@ -5,5 +5,6 @@ class PoliciesController < ApplicationController
   
   def show
     @policy = Policy.find(params[:id])
+    @sites = @policy.sites.paginate(page:params[:page])
   end
 end

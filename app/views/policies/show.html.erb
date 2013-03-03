@@ -1,2 +1,12 @@
 <h1><%= @policy.name %></h1>
-<p>Version model needs to be implemented</p>
+<h3>Updated on <%= @policy.updated_at.to_date.to_formatted_s(:long) %></h3>
+<div class="row">
+	<div class="span3">
+		<div id="policy_sites">
+		<%= render 'shared/list_each_as_link', list_object: @sites, ul_class: "sites" %>
+		</div>
+	</div>
+	<div class="span9">
+		<%= @policy.detail %>
+	</div>
+</div>

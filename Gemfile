@@ -12,6 +12,7 @@ gem 'sanitize', '~> 2.0.3'
 gem 'nokogiri', '~> 1.5.6'
 gem 'will_paginate', '~> 3.0.4'
 gem "json", "~> 1.7.7"
+gem 'differ', "~> 0.1.2"
 
 # Gems used only for assets and not required
 # in production environments by default.
