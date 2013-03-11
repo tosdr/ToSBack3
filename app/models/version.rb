@@ -12,9 +12,9 @@
 class Version < ActiveRecord::Base
   belongs_to :policy
   
-  default_scope order("created_at ASC")  
+  default_scope order("created_at DESC")  
   
-  attr_accessible :policy_id, :previous_crawl
+  attr_accessible :previous_crawl
   
   validates :policy_id, :previous_crawl, presence: true
 end
