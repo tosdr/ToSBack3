@@ -31,22 +31,29 @@ describe "PoliciesController" do
   
   describe "visiting #show" do
 
-    context "when policy has many versions" do
+    context "when policy has many sites and versions" do
       before do
-        @policy = FactoryGirl.create(:policy_with_sites_and_versions)
+        @policy = FactoryGirl.create(:policy_with_sites_and_versions, sites_count: 14, versions_count: 17)
         visit policy_path(@policy)
       end
       
-      it "has links to the sites using the policy" do
-        @policy.sites.each do |site|
-          page.should have_link(site.name, href: site_path(site.id))
-          page.should have_selector('li', text: site.name)
+      it "paginates site links to the first 10" do
+        @policy.sites.each_with_index do |site, i|
+          if i<10
+            page.should have_link(site.name, href: site_path(site.id))
+            page.should have_selector('li', text: site.name)
+          else
+            page.should_not have_link(site.name, href: site_path(site.id))
+            page.should_not have_selector('li', text: site.name)
+          end
         end
       end
       
+      it { should have_selector('div.pagination') }
+      
       it { should have_selector('h1', text: @policy.name) }
       it { should have_selector('h3', text: @policy.updated_at.to_date.strftime("%B %-d, %Y")) }
-    end #many versions
-        
+    end #many 
+         
   end #visiting #show
 end
