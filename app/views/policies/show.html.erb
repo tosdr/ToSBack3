@@ -7,6 +7,15 @@
 			<%= render 'shared/list_each_as_link', list_object: @sites, ul_class: "sites" %>
 			<%= will_paginate @sites, param_name: 'site_page' %>
 		</div>
+		<div id="policy_versions">
+			<h4>View changes from:</h4>
+			<ul class="versions">
+				<% @versions.each do |v| %>
+					<li><%= link_to v.created_at.to_date.to_formatted_s(:long), diff_id: v.id %></li>
+				<% end %>
+			</ul>
+			<%= will_paginate @versions, param_name: 'v_page' %>
+		</div>
 	</div>
 	<div class="span9">
 		<%= @policy.detail %>

@@ -49,6 +49,16 @@ describe "PoliciesController" do
         end
       end
       
+      it "paginates version links to the first 10" do
+        @policy.versions.each_with_index do |version, i|
+          if i<10
+            page.should have_link(version.created_at.to_date.strftime("%B %-d, %Y"))
+          else
+            page.should_not have_link(version.created_at.to_date.strftime("%B %-d, %Y"))
+          end
+        end
+      end
+      
       it { should have_selector('div.pagination') }
       
       it { should have_selector('h1', text: @policy.name) }
