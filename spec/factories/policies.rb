@@ -22,10 +22,10 @@ FactoryGirl.define do
         sites_count 5
         versions_count 5
       end
-      
+
       after(:create) do |policy, eval|
         eval.sites_count.times { policy.sites << FactoryGirl.create(:site) }
-        eval.versions_count.times { |n| FactoryGirl.create(:version, policy: policy, created_at: (n+1).days.ago) }        
+        eval.versions_count.times {|n| policy.versions << FactoryGirl.create(:version, policy: policy, created_at: (n+1).days.ago) }
       end
     end #with_sites
     

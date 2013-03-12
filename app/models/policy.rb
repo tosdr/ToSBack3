@@ -38,7 +38,7 @@ class Policy < ActiveRecord::Base
   
   def update_current_version
     unless versions.empty?
-      old_version = versions.last
+      old_version = versions.first
       old_version.update_attributes(previous_crawl: detail_was)
     end
       
