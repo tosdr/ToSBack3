@@ -34,12 +34,17 @@ describe Version do
   end #validates presence
   
   describe "changes_from_previous()" do
-    before(:each) { @policy = FactoryGirl.create(:policy_with_sites_and_versions, sites_count: 1, versions_count: 3) } #policy model has a callback that creates a version 'current version'
+    # policy model has a callback that creates a version 'current version' so
+    # @policy really has 4 versions below even though versions_count is 3
+    # see factories/policies.rb for details on differences between versions
+    let(:vcount) { 3 }
+    
+    before(:each) { @policy = FactoryGirl.create(:policy_with_sites_and_versions, sites_count: 1, versions_count: vcount) } 
     let(:original_detail) { FactoryGirl.attributes_for(:policy)[:detail] }
         
     it "current versions use policy.detail instead of previous_crawl's 'Current Version'" do
       @version = @policy.versions.first
-      @version.changes_from_previous.should eq(@policy.detail)
+      @version.changes_from_previous.should eq(Diffy::Diff.new(@policy.detail[0..-2], @policy.detail).to_s(:html))
     end
     
     context "with a newer better policy.detail" do
@@ -51,12 +56,12 @@ describe Version do
       
       it "newest version diffs policy.detail with version.previous_crawl" do
         @version = @policy.versions.first
-        @version.changes_from_previous.should eq(Differ.diff_by_word("newer better policy", original_detail).format_as(:html))
+        @version.changes_from_previous.should eq(Diffy::Diff.new(original_detail, "newer better policy").to_s(:html))
       end
       
       it "earliest version returns original policy detail (version.previous_crawl)" do
         @version = @policy.versions.last
-        @version.changes_from_previous.should eq(original_detail[0..-3])
+        @version.changes_from_previous.should eq(Diffy::Diff.new(original_detail[0..-(vcount+1)], original_detail[0..-(vcount+1)]).to_s(:html))
       end
     end
     

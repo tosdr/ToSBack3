@@ -26,7 +26,10 @@ FactoryGirl.define do
       after(:create) do |policy, eval|
         eval.sites_count.times { policy.sites << FactoryGirl.create(:site) }
         eval.versions_count.times do |n| 
-          policy.versions << FactoryGirl.create(:version, policy: policy, previous_crawl: policy.detail[0..-(n+1)], created_at: (n+1).days.ago)
+          policy.versions << FactoryGirl.create(:version, policy: policy, previous_crawl: policy.detail[0..-(n+2)], created_at: (n+1).days.ago)
+          
+          # i.e. older the created_at date in the db, the shorter the version is. e.g. two days old = two characters sliced off.
+          # appears in tests like one character is added per day
         end
       end
     end #with_sites

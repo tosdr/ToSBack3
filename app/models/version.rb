@@ -22,9 +22,13 @@ class Version < ActiveRecord::Base
   def changes_from_previous
     current = current_version? ? policy.detail : previous_crawl
     if prev = previous_version
-      Differ.diff_by_word(current, prev.previous_crawl).format_as(:html).html_safe
+      Diffy::Diff.new(prev.previous_crawl, current).to_s(:html).html_safe
+
+      # Differ.diff_by_line(current, prev.previous_crawl).format_as(:html).html_safe
     else
-      current.html_safe
+      Diffy::Diff.new(current, current).to_s(:html).html_safe
+      
+      # current.html_safe
     end
   end
   
