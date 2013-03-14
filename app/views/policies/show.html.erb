@@ -1,5 +1,5 @@
 <h1><%= @policy.name %></h1>
-<h3>Updated on <%= @policy.updated_at.to_date.to_formatted_s(:long) %></h3>
+<h3>Updated on <%= @version.created_at.to_date.to_formatted_s(:long) %></h3>
 <div class="row">
 	<div class="span3">
 		<div id="policy_sites">
@@ -18,6 +18,8 @@
 		</div>
 	</div>
 	<div class="span9">
-		<%= @policy.detail %>
+		<div id="policy_changes">
+			<%= @version.changes_from_previous %>
+		</div>
 	</div>
 </div>

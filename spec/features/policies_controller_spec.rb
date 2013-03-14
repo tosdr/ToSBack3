@@ -36,6 +36,10 @@ describe "PoliciesController" do
         @policy = FactoryGirl.create(:policy_with_sites_and_versions, sites_count: 14, versions_count: 17)
         visit policy_path(@policy)
       end
+      # let(:changes) { Nokogiri::HTML(page.source).xpath("//div[@id='policy_changes']/node()").to_s }
+      
+      it { should have_selector('h1', text: @policy.name) }
+      it { should have_selector('h3', text: @policy.updated_at.to_date.strftime("%B %-d, %Y")) }
       
       it "paginates site links to the first 10" do
         @policy.sites.each_with_index do |site, i|
@@ -59,10 +63,14 @@ describe "PoliciesController" do
         end
       end
       
-      it { should have_selector('div.pagination') }
+      it { should have_selector('div.pagination') }      
+      it { has_selector?('div#policy_changes') }
       
-      it { should have_selector('h1', text: @policy.name) }
-      it { should have_selector('h3', text: @policy.updated_at.to_date.strftime("%B %-d, %Y")) }
+      context "clicking a link to a different version" do
+        before { click_link(@policy.versions[5].created_at.to_date.strftime("%B %-d, %Y")) }
+        
+        it { should have_selector('h3', text: @policy.versions[5].created_at.to_date.strftime("%B %-d, %Y")) }
+      end
     end #many 
          
   end #visiting #show
