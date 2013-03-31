@@ -20,7 +20,8 @@ describe Policy do
     FactoryGirl.build(:policy).should be_valid
   end
   
-  let(:example) { FactoryGirl.create(:policy) }
+  # let(:example) { FactoryGirl.create(:policy) }
+  before(:each) { @example = FactoryGirl.create(:policy) }
     
   it { should respond_to(:sites) }
   it { should respond_to(:commitments) }
@@ -30,7 +31,7 @@ describe Policy do
   it { should respond_to(:users) }
   
   it "creates an initial version automatically" do
-    example.versions.count.should eq(1)
+    @example.versions.count.should eq(1)
   end
   
   describe "#validates presence" do
@@ -43,18 +44,19 @@ describe Policy do
   end # validates
   
   describe "creating duplicate policy" do
-    let(:dup) { FactoryGirl.build(:policy, url: example.url, xpath: example.xpath) }
+    # let(:dup) { FactoryGirl.build(:policy, url: @example.url, xpath: @example.xpath) } # using before to be more consistent
+    before(:each) { @dup = FactoryGirl.build(:policy, url: @example.url, xpath: @example.xpath) }
   
     it "is invalid if it has duplicate url and xpath" do
-      dup.should_not be_valid
+      @dup.should_not be_valid
     end
     it "is valid if url is duplicate but xpath is different" do
-      dup.xpath = "//div[@id='xxxxx']"
-      dup.should be_valid
+      @dup.xpath = "//div[@id='xxxxx']"
+      @dup.should be_valid
     end
     it "is valid if xpath is duplicate but url is different" do
-      dup.url = "http://ex.com/terms"
-      dup.should be_valid
+      @dup.url = "http://ex.com/terms"
+      @dup.should be_valid
     end
   end # when policy is dup
   
