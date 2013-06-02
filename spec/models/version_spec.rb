@@ -2,11 +2,12 @@
 #
 # Table name: versions
 #
-#  id             :integer          not null, primary key
-#  policy_id      :integer
-#  previous_crawl :text
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  id              :integer          not null, primary key
+#  policy_id       :integer
+#  previous_policy :text
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  full_page       :text
 #
 
 require 'spec_helper'
@@ -27,8 +28,8 @@ describe Version do
       version.should_not be_valid
     end
     
-    it "is invalid without previous_crawl" do
-      version.previous_crawl = "   "
+    it "is invalid without previous_policy" do
+      version.previous_policy = "   "
       version.should_not be_valid
     end
   end #validates presence
@@ -42,7 +43,7 @@ describe Version do
     before(:each) { @policy = FactoryGirl.create(:policy_with_sites_and_versions, sites_count: 1, versions_count: vcount) } 
     let(:original_detail) { FactoryGirl.attributes_for(:policy)[:detail] }
         
-    it "current versions use policy.detail instead of previous_crawl's 'Current Version'" do
+    it "current versions use policy.detail instead of previous_policy's 'Current Version'" do
       @version = @policy.versions.first
       @version.changes_from_previous.should eq(Diffy::Diff.new(@policy.detail[0..-2], @policy.detail).to_s(:html))
     end
@@ -54,12 +55,12 @@ describe Version do
         @policy.reload
       end
       
-      it "newest version diffs policy.detail with version.previous_crawl" do
+      it "newest version diffs policy.detail with version.previous_policy" do
         @version = @policy.versions.first
         @version.changes_from_previous.should eq(Diffy::Diff.new(original_detail, "newer better policy").to_s(:html))
       end
       
-      it "earliest version returns original policy detail (version.previous_crawl)" do
+      it "earliest version returns original policy detail (version.previous_policy)" do
         @version = @policy.versions.last
         @version.changes_from_previous.should eq(Diffy::Diff.new(original_detail[0..-(vcount+1)], original_detail[0..-(vcount+1)]).to_s(:html))
       end

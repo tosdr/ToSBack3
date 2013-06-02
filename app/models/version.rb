@@ -2,11 +2,12 @@
 #
 # Table name: versions
 #
-#  id             :integer          not null, primary key
-#  policy_id      :integer
-#  previous_crawl :text
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  id              :integer          not null, primary key
+#  policy_id       :integer
+#  previous_policy :text
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  full_page       :text
 #
 
 class Version < ActiveRecord::Base
@@ -14,17 +15,17 @@ class Version < ActiveRecord::Base
   
   default_scope order("created_at DESC")  
   
-  attr_accessible :previous_crawl
+  attr_accessible :previous_policy
   
-  validates :policy_id, :previous_crawl, presence: true
+  validates :policy_id, :previous_policy, presence: true
   
   # Make sure this always stays *really* html_safe!
   def changes_from_previous
-    current = current_version? ? policy.detail : previous_crawl
+    current = current_version? ? policy.detail : previous_policy
     if prev = previous_version
-      Diffy::Diff.new(prev.previous_crawl, current).to_s(:html).html_safe
+      Diffy::Diff.new(prev.previous_policy, current).to_s(:html).html_safe
 
-      # Differ.diff_by_line(current, prev.previous_crawl).format_as(:html).html_safe
+      # Differ.diff_by_line(current, prev.previous_policy).format_as(:html).html_safe
     else
       Diffy::Diff.new(current, current).to_s(:html).html_safe
       
@@ -39,7 +40,7 @@ class Version < ActiveRecord::Base
   end
   
   def current_version?
-    previous_crawl == "Current Version"
+    previous_policy == "Current Version"
   end
   
 end

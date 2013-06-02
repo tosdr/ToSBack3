@@ -4,9 +4,10 @@
 #
 #  id         :integer          not null, primary key
 #  policy_id  :integer
-#  scrape     :text
+#  full_page  :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  policy     :text
 #
 
 require 'spec_helper'

@@ -98,11 +98,11 @@ describe Policy do
         end
       
         specify "second to last version equals old policy detail" do
-          @modified.versions[-2].previous_crawl.should eq(@old_crawl)
+          @modified.versions[-2].previous_policy.should eq(@old_crawl)
         end
       
         specify "most recent version represents current version" do
-          @modified.versions.last.previous_crawl.should eq("Current Version")
+          @modified.versions.last.previous_policy.should eq("Current Version")
         end
         
       end # policy is saved

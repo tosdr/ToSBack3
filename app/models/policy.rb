@@ -38,11 +38,11 @@ class Policy < ActiveRecord::Base
   
   def update_current_version
     unless versions.empty?
-      old_version = versions.first
-      old_version.update_attributes(previous_crawl: detail_was)
+      old_version = versions.first # because of default scope order of versions
+      old_version.update_attributes(previous_policy: detail_was)
     end
       
-    versions.create(previous_crawl: "Current Version")
+    versions.create(previous_policy: "Current Version")
   end
   
   def needs_new_version?
