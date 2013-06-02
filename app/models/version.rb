@@ -15,7 +15,7 @@ class Version < ActiveRecord::Base
   
   default_scope order("created_at DESC")  
   
-  attr_accessible :previous_policy
+  attr_accessible :previous_policy, :full_page
   
   validates :policy_id, :previous_policy, presence: true
   
