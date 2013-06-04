@@ -13,4 +13,5 @@ class VersionsController < ApplicationController
   
   def get_policy
     @policy = Policy.find(params[:policy_id])
+  end
 end

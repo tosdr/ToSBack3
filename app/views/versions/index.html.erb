@@ -1,2 +1,7 @@
-<h1>Versions#index</h1>
-<p>Find me in app/views/versions/index.html.erb</p>
+<h1>All versions of <%= @policy.name %></h1>
+<ul class="policy_versions">
+	<% @versions.each do |v| %>
+		<li><%= link_to v.created_at.to_date.to_formatted_s(:long), [@policy, v] %></li>
+	<% end %>
+</ul>
+<%= will_paginate @policies %>
