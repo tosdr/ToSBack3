@@ -1,7 +1,10 @@
 Tosback3::Application.routes.draw do
+
   root to: 'policies#index'
   
-  resources :policies, only: [:index, :show]
+  resources :policies, only: [:index, :show] do
+    resources :versions, only: [:index, :show]
+  end
   resources :sites, only: [:index, :show]
   # resources :sessions, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create, :edit, :update, :show]
