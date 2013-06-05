@@ -1,7 +1,14 @@
 <h1>All versions of <%= @policy.name %></h1>
-<ul class="policy_versions">
-	<% @versions.each do |v| %>
-		<li><%= link_to v.created_at.to_date.to_formatted_s(:long), [@policy, v] %></li>
-	<% end %>
-</ul>
+<div class="row">
+  <div class="span3">
+	<%= link_to "Back to current policy...", policy_path(@policy) %>
+  </div>
+  <div class="span9">
+	<ul class="policy_versions">
+      <% @versions.each do |v| %>
+        <li><%= link_to v.created_at.to_date.to_formatted_s(:long), [@policy, v] %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 <%= will_paginate @versions %>

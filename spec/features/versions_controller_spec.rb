@@ -13,6 +13,8 @@ describe "VersionsController" do
       #squish out those extra spaces
     end
     
+    it { should have_link("Back to current policy...", href: policy_path(@policy)) }
+    
     #TODO shared example for pagination links
     it "lists page numbers" do
       page.should have_selector('div.pagination')
