@@ -33,6 +33,11 @@ class Version < ActiveRecord::Base
     end
   end
   
+  # TODO write test for this:
+  def display_policy
+    current_version? ? policy.detail : previous_policy
+  end
+  
   protected
   
   def previous_version
