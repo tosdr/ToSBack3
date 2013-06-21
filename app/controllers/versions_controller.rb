@@ -7,6 +7,7 @@ class VersionsController < ApplicationController
 
   def show
     @version = @policy.versions.find(params[:id])
+    @versions = @policy.versions.limit(10)
   end
   
   private

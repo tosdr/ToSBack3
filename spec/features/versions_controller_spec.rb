@@ -21,4 +21,25 @@ describe "VersionsController" do
     end
     
   end
+  
+  describe "visiting versions#show" do
+
+    context "when policy has many sites and versions" do
+      before(:each) { @policy = FactoryGirl.create(:policy_with_sites_and_versions, sites_count: 14, versions_count: 32) }
+      before { @version = @policy.versions[2] }
+      before { visit policy_version_path(@policy,@version) }
+      
+      it { should have_selector('h1', text: @policy.name) }
+      it { should have_selector('h3', text: @version.created_at.to_date.strftime("%B %-d, %Y")) }
+      
+      it { should have_selector('div#previous_policy') }
+      
+      context "clicking a link to a different version" do
+        before { click_link(@policy.versions[5].created_at.to_date.strftime("%B %-d, %Y")) }
+        
+        it { should have_selector('h3', text: @policy.versions[5].created_at.to_date.strftime("%B %-d, %Y")) }
+      end
+    end #many 
+         
+  end #visiting #show
 end

@@ -64,7 +64,7 @@ describe "PoliciesController" do
       end
       
       it { should have_selector('div.pagination') }      
-      it { should have_selector('div#policy_changes') }
+      it { should have_selector('div#policy_current') }
       
       context "clicking a link to a different version" do
         before { click_link(@policy.versions[5].created_at.to_date.strftime("%B %-d, %Y")) }

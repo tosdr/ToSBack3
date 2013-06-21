@@ -6,7 +6,7 @@ class PoliciesController < ApplicationController
   def show
     @policy = Policy.find(params[:id])
     @sites = @policy.sites.paginate(page:params[:site_page], per_page: 10)
-    @versions = @policy.versions.paginate(page:params[:v_page], per_page: 10)
-    @version = params[:diff_id].nil? ? @policy.versions.first : @policy.versions.find(params[:diff_id])
+    @versions = @policy.versions.limit(10)
+    # @version = params[:diff_id].nil? ? @policy.versions.first : @policy.versions.find(params[:diff_id])
   end
 end
