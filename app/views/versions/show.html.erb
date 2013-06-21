@@ -1,5 +1,13 @@
 <h1><%= @policy.name %></h1>
-<h3>from <%= @version.created_at.to_date.to_formatted_s(:long) %></h3>
+<div class="row">
+	<div class="span6">
+		<h3>from <%= @version.created_at.to_date.to_formatted_s(:long) %></h3>
+	</div>
+	<div class="span6">
+		<%= link_to "Differences with current", policy_version_path(@policy,@version,diff: "current"), class: "btn" %>
+		<%= link_to "Differences with previous", policy_version_path(@policy,@version, diff: "previous"), class: "btn" %>
+	</div>
+</div>
 <div class="row">
 	<div class="span3">
 		<div id="version_links">
@@ -15,7 +23,7 @@
 	</div>
 	<div class="span9">
 		<div id="previous_policy">
-			<%= @version.display_policy %>
+			<%= @content %>
 		</div>
 	</div>
 </div>

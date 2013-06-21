@@ -33,6 +33,18 @@ class Version < ActiveRecord::Base
     end
   end
   
+  # TODO test this too:
+  def changes_with_current
+    if current_version?
+      policy.detail
+      # Differ.diff_by_line(current, prev.previous_policy).format_as(:html).html_safe
+    else
+      Diffy::Diff.new(previous_policy, policy.detail).to_s(:html).html_safe
+      
+      # current.html_safe
+    end
+  end
+  
   # TODO write test for this:
   def display_policy
     current_version? ? policy.detail : previous_policy

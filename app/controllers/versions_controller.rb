@@ -8,6 +8,14 @@ class VersionsController < ApplicationController
   def show
     @version = @policy.versions.find(params[:id])
     @versions = @policy.versions.limit(10)
+    
+    if params[:diff].nil?
+      @content = @version.display_policy
+    elsif params[:diff] == "current"
+      @content = @version.changes_with_current
+    elsif params[:diff] == "previous"
+      @content = @version.changes_from_previous
+    end
   end
   
   private
