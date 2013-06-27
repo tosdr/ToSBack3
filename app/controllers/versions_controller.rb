@@ -10,7 +10,7 @@ class VersionsController < ApplicationController
     @versions = @policy.versions.limit(10)
     
     if params[:diff].nil?
-      @content = @version.display_policy
+      @content = @version.display_policy.html_safe
     elsif params[:diff] == "current"
       @content = @version.changes_with_current
     elsif params[:diff] == "previous"
