@@ -1,0 +1,16 @@
+<% @notifications.each do |n| %>
+	<div class='timeline'>
+		<%= image_tag n.image_from_sitename, size:"32x32" %>
+		<div class='info'>
+			<h3><%= n.site.capitalize %></h3>
+			<div class='changed'>
+				TOSBack recorded a new version of the <%= n.name %>
+			</div><!--changed-->
+			<div class='when'>
+				<%= n.created_at.to_date.to_formatted_s(:long) %>
+			</div><!--when-->
+		</div><!-- info-->
+		<br class='clear'>
+	</div><!--timeline-->
+<% end %>
+<%= will_paginate @notifications %>
