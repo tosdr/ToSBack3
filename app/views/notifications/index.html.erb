@@ -4,7 +4,8 @@
 		<div class='info'>
 			<h3><%= n.site.capitalize %></h3>
 			<div class='changed'>
-				TOSBack recorded a new version of the <%= n.name %>
+				TOSBack recorded a new version of the <%= n.name %><br />
+				<%= link_to "View the changes on Github", n.diff_url %>
 			</div><!--changed-->
 			<div class='when'>
 				<%= n.created_at.to_date.to_formatted_s(:long) %>
