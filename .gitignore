@@ -14,4 +14,7 @@
 /log/*.log
 /tmp
 
+# Ignore public assets for dev
+/public/assets
+
 .DS_Store
