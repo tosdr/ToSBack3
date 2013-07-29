@@ -15,19 +15,25 @@ namespace :xml do
       site = Site.where(name: ngxml.xpath("//sitename[1]/@name").to_s).first
       # create site if it doesn't
       if site.nil?
-        Site.create(name:ngxml.xpath("//sitename[1]/@name").to_s)
+        site = Site.create(name:ngxml.xpath("//sitename[1]/@name").to_s)
       end
     
       ngxml.xpath("//sitename/docname").each do |doc|
-        # docs << TOSBackDoc.new({site: site, name: doc.at_xpath("./@name").to_s, url: doc.at_xpath("./url/@name").to_s, xpath: doc.at_xpath("./url/@xpath").to_s, reviewed: doc.at_xpath("./url/@reviewed").to_s})
-        p = Policy.where(url:doc.at_xpath("./url/@name").to_s, xpath: doc.at_xpath("./url/@xpath").to_s).first
+        doc_hash = {}
+        doc_hash[:name] = doc.at_xpath("./@name").to_s
+        doc_hash[:url] = doc.at_xpath("./url/@name").to_s
+        doc_hash[:xpath] = (doc.at_xpath("./url/@xpath").to_s == "") ? nil : doc.at_xpath("./url/@xpath").to_s
+        doc_hash[:nr] = (doc.at_xpath("./url/@reviewed").to_s == "") ? true : nil
+        doc_hash[:lang] = (doc.at_xpath("./url/@lang").to_s == "") ? nil : doc.at_xpath("./url/@lang").to_s
+
+        p = Policy.where(url:doc_hash[:url], xpath: doc_hash[:xpath]).first
         if p.nil?
-          Policy.create do |plcy|
-            plcy.name = doc.at_xpath("./@name").to_s
-            plcy.url = doc.at_xpath("./url/@name").to_s
-            plcy.xpath = (doc.at_xpath("./url/@xpath").to_s == "") ? nil : doc.at_xpath("./url/@xpath").to_s
-            plcy.needs_revision = (doc.at_xpath("./url/@reviewed").to_s == "") ? true : nil
-            plcy.lang = (doc.at_xpath("./url/@lang").to_s == "") ? nil : doc.at_xpath("./url/@lang").to_s
+          p = Policy.create do |plcy|
+            plcy.name = doc_hash[:name] 
+            plcy.url = doc_hash[:url]
+            plcy.xpath = doc_hash[:xpath]
+            plcy.needs_revision = doc_hash[:nr]
+            plcy.lang = doc_hash[:lang] 
           end
         end # if p.nil?
       
