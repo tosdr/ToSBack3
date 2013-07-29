@@ -1,8 +1,9 @@
 # encoding: UTF-8
 namespace :xml do
   desc "Import the XML rules to sites and policies"
-  task :import_xml => :environment do  
-    Dir.foreach("../../tosdr/tosback2/rules/") do |xml_file| # loop for each xml file/rule
+  task :import_xml => :environment do
+    path = (Rails.env == "development") ? "../../tosdr/tosback2/rules/" : "/root/tosback2/rules/"
+    Dir.foreach(path) do |xml_file| # loop for each xml file/rule
       #TODO add path above
       next if xml_file == "." || xml_file == ".."
     
