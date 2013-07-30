@@ -62,7 +62,7 @@ namespace :xml do
         rule_file.print " lang=\"#{policy.lang}\"" unless policy.lang.nil?
         rule_file.print " reviewed=\"true\"" unless policy.needs_revision
         rule_file.print ">\n"
-        rule_file.print "      <norecurse name=\"arbitrary\"/>\n    </url>\n  </docname>\n"
+        rule_file.print "      <norecurse name=\"arbitrary\" />\n    </url>\n  </docname>\n"
       end
       
       rule_file.print "</sitename>\n"
