@@ -49,21 +49,23 @@ namespace :xml do
   task :export_xml => :environment do
     path = ENV['path']
     
+    Dir.mkdir(path) unless File.exists?(path)
+    
     Site.all.each do |site|
       rule_file = File.open(path + site.name + ".xml","w") # new file or overwrite old file
-      rule_file.puts "<sitename name=\"#{site.name}\">\n"
+      rule_file.print "<sitename name=\"#{site.name}\">\n"
 
       site.policies.each do |policy|
-        rule_file.puts "  <docname name=\"#{policy.name}\">\n"
-        rule_file.puts "    <url name=\"#{policy.url}\""
-        rule_file.puts " xpath=\"#{policy.xpath}\"" unless policy.xpath.nil?
-        rule_file.puts " lang=\"#{policy.lang}\"" unless policy.lang.nil?
-        rule_file.puts " reviewed='true'" unless policy.needs_revision
-        rule_file.puts ">\n"
-        rule_file.puts "      <norecurse name=\"arbitrary\"/>\n    </url>\n  </docname>\n"
+        rule_file.print "  <docname name=\"#{policy.name}\">\n"
+        rule_file.print "    <url name=\"#{policy.url}\""
+        rule_file.print " xpath=\"#{policy.xpath}\"" unless policy.xpath.nil?
+        rule_file.print " lang=\"#{policy.lang}\"" unless policy.lang.nil?
+        rule_file.print " reviewed='true'" unless policy.needs_revision
+        rule_file.print ">\n"
+        rule_file.print "      <norecurse name=\"arbitrary\"/>\n    </url>\n  </docname>\n"
       end
       
-      rule_file.puts "</sitename>\n"
+      rule_file.print "</sitename>\n"
       rule_file.close
     end #policy.all.each
   end # export_xml
