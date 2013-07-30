@@ -2,7 +2,8 @@
 namespace :xml do
   desc "Import the XML rules to sites and policies"
   task :import_xml => :environment do
-    path = (Rails.env == "development") ? "../../tosdr/tosback2/rules/" : "/root/tosback2/rules/"
+    path = ENV['path']
+    # path = (Rails.env == "development") ? "../../tosdr/tosback2/rules/" : "/root/tosback2/rules/"
     Dir.foreach(path) do |xml_file| # loop for each xml file/rule
       #TODO add path above
       next if xml_file == "." || xml_file == ".."
@@ -42,6 +43,28 @@ namespace :xml do
         end # unless policy has site already
       end # each doc
     end # each xml file
-  
-  end
+  end # import_xml
+
+  desc "Export the sites and policies in the db to XML"
+  task :export_xml => :environment do
+    path = ENV['path']
+    
+    Site.all.each do |site|
+      rule_file = File.open(path + site.name + ".xml","w") # new file or overwrite old file
+      rule_file.puts "<sitename name=\"#{site.name}\">\n"
+
+      site.policies.each do |policy|
+        rule_file.puts "  <docname name=\"#{policy.name}\">\n"
+        rule_file.puts "    <url name=\"#{policy.url}\""
+        rule_file.puts " xpath=\"#{policy.xpath}\"" unless policy.xpath.nil?
+        rule_file.puts " lang=\"#{policy.lang}\"" unless policy.lang.nil?
+        rule_file.puts " reviewed='true'" unless policy.needs_revision
+        rule_file.puts ">\n"
+        rule_file.puts "      <norecurse name=\"arbitrary\"/>\n    </url>\n  </docname>\n"
+      end
+      
+      rule_file.puts "</sitename>\n"
+      rule_file.close
+    end #policy.all.each
+  end # export_xml
 end
