@@ -56,11 +56,11 @@ namespace :xml do
       rule_file.print "<sitename name=\"#{site.name}\">\n"
 
       site.policies.each do |policy|
-        rule_file.print "  <docname name=\"#{policy.name}\">\n"
-        rule_file.print "    <url name=\"#{policy.url}\""
+        rule_file.print "  <docname name=\"#{CGI.escape_html(policy.name)}\">\n"
+        rule_file.print "    <url name=\"#{CGI.escape_html(policy.url)}\""
         rule_file.print " xpath=\"#{policy.xpath}\"" unless policy.xpath.nil?
         rule_file.print " lang=\"#{policy.lang}\"" unless policy.lang.nil?
-        rule_file.print " reviewed='true'" unless policy.needs_revision
+        rule_file.print " reviewed=\"true\"" unless policy.needs_revision
         rule_file.print ">\n"
         rule_file.print "      <norecurse name=\"arbitrary\"/>\n    </url>\n  </docname>\n"
       end
