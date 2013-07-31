@@ -13,10 +13,10 @@ namespace :xml do
       filecontent.close
   
       # check to see if site exists
-      site = Site.where(name: ngxml.xpath("//sitename[1]/@name").to_s).first
+      site = Site.where(name: ngxml.xpath("//sitename[1]/@name").to_s.downcase).first
       # create site if it doesn't
       if site.nil?
-        site = Site.create(name:ngxml.xpath("//sitename[1]/@name").to_s)
+        site = Site.create(name:ngxml.xpath("//sitename[1]/@name").to_s.downcase)
       end
     
       ngxml.xpath("//sitename/docname").each do |doc|
