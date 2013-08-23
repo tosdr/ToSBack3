@@ -92,6 +92,27 @@ img {
   right: 0;
   bottom: 16px;
   font-size: 12px;
+
+}
+
+#eff_logo {
+  width:53px;
+  height:35px;
+  background-image: url(../eff_logo.png);
+  text-indent: -5000px;
+  float:left;
+  margin-left:12px;
+  margin-top:4px;
+}
+
+#tosdr_logo {
+  width:32px;
+  height:32px;
+  background-image: url(../tosdr_logo.png);
+  text-indent: -5000px;
+  float:left;
+  margin-left:12px;
+  margin-top:4px;
 }
 
 #header #user a {
@@ -275,7 +296,7 @@ img {
 
 #footer h5{
   position: absolute;
-  top: 4px;
+  top: 6px;
   left: 0;
 
   width: 306px;
@@ -284,6 +305,18 @@ img {
   
   text-indent: -5000px;
 }
+
+/*#footer #tosdr_footer {
+  position: absolute;
+  top: 8px;
+  left: 350px;
+
+  width: 300px;
+  height: 32px;
+  background-image: url(tosdr_footer.png);
+  
+  text-indent: -5000px;
+}*/
 
 
 /* DIFF styles */
