@@ -297,7 +297,7 @@ img {
 #footer h5{
   position: absolute;
   top: 6px;
-  left: 0;
+  left: 50px;
 
   width: 306px;
   height: 30px;
@@ -306,17 +306,17 @@ img {
   text-indent: -5000px;
 }
 
-/*#footer #tosdr_footer {
+#footer #tosdr_footer {
   position: absolute;
   top: 8px;
-  left: 350px;
+  left: 400px;
 
-  width: 300px;
+  width: 190px;
   height: 32px;
-  background-image: url(tosdr_footer.png);
+  background-image: url(tosdr-logo-32-w.png);
   
   text-indent: -5000px;
-}*/
+}
 
 
 /* DIFF styles */
