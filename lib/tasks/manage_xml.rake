@@ -3,12 +3,11 @@ namespace :xml do
   desc "Import the XML rules to sites and policies"
   task :import_xml => :environment do
     path = ENV['path']
-    # path = (Rails.env == "development") ? "../../tosdr/tosback2/rules/" : "/root/tosback2/rules/"
-    Dir.foreach(path) do |xml_file| # loop for each xml file/rule
-      #TODO add path above
+    # Point path to tosback2 folder ( e.g. rake xml:import_xml path=../../tosdr/tosback2/ )
+    Dir.foreach(path+"rules/") do |xml_file| # loop for each xml file/rule
       next if xml_file == "." || xml_file == ".."
     
-      filecontent = File.open(path + xml_file)
+      filecontent = File.open(path + "rules/" + xml_file)
       ngxml = Nokogiri::XML(filecontent)
       filecontent.close
   
@@ -26,6 +25,7 @@ namespace :xml do
         doc_hash[:xpath] = (doc.at_xpath("./url/@xpath").to_s == "") ? nil : doc.at_xpath("./url/@xpath").to_s
         doc_hash[:nr] = (doc.at_xpath("./url/@reviewed").to_s == "") ? true : nil
         doc_hash[:lang] = (doc.at_xpath("./url/@lang").to_s == "") ? nil : doc.at_xpath("./url/@lang").to_s
+        doc_hash[:txt_file] = (doc_hash[:nr] == nil) ? "#{path}crawl_reviewed/#{site.name}/#{doc_hash[:name]}.txt" : "#{path}crawl/#{site.name}/#{doc_hash[:name]}.txt"
 
         p = Policy.where(url:doc_hash[:url], xpath: doc_hash[:xpath]).first
         if p.nil?
@@ -35,6 +35,11 @@ namespace :xml do
             plcy.xpath = doc_hash[:xpath]
             plcy.needs_revision = doc_hash[:nr]
             plcy.lang = doc_hash[:lang] 
+            #TODO see if chomp is necessary for making the diffs work right once the
+            # new crawler is finished
+            File.open(doc_hash[:txt_file]) do |crawl|
+              plcy.detail = crawl.read.chomp
+            end
           end
         end # if p.nil?
       
@@ -47,7 +52,8 @@ namespace :xml do
 
   desc "Export the sites and policies in the db to XML"
   task :export_xml => :environment do
-    path = ENV['path']
+    # Point path to tosback2 folder ( e.g. rake xml:export_xml path=../../tosdr/tosback2/ )
+    path = ENV['path'] + "rules/"
     
     Dir.mkdir(path) unless File.exists?(path)
     
