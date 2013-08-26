@@ -25,7 +25,7 @@ namespace :xml do
         doc_hash[:xpath] = (doc.at_xpath("./url/@xpath").to_s == "") ? nil : doc.at_xpath("./url/@xpath").to_s
         doc_hash[:nr] = (doc.at_xpath("./url/@reviewed").to_s == "") ? true : nil
         doc_hash[:lang] = (doc.at_xpath("./url/@lang").to_s == "") ? nil : doc.at_xpath("./url/@lang").to_s
-        doc_hash[:txt_file] = (doc_hash[:nr] == nil) ? "#{path}crawl_reviewed/#{site.name}/#{doc_hash[:name]}.txt" : "#{path}crawl/#{site.name}/#{doc_hash[:name]}.txt"
+        doc_hash[:txt_file] = (doc_hash[:nr] == nil) ? "crawl_reviewed/#{site.name}/#{doc_hash[:name]}.txt" : "crawl/#{site.name}/#{doc_hash[:name]}.txt"
 
         p = Policy.where(url:doc_hash[:url], xpath: doc_hash[:xpath]).first
         if p.nil?
@@ -37,11 +37,18 @@ namespace :xml do
             plcy.lang = doc_hash[:lang] 
             #TODO see if chomp is necessary for making the diffs work right once the
             # new crawler is finished
-            File.open(doc_hash[:txt_file]) do |crawl|
+            File.open(path+doc_hash[:txt_file]) do |crawl|
               plcy.detail = crawl.read.chomp
             end
           end
         end # if p.nil?
+        
+        unless p.needs_revision == true
+          date_of_crawl = IO.popen("cd #{path}; git log -1 --format='%cd' '#{doc_hash[:txt_file]}'").read
+          version = p.versions.first
+          version.created_at = DateTime.parse(date_of_crawl)
+          version.save
+        end
       
         unless p.sites.include?(site)
           p.sites << site
