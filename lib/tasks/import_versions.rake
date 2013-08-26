@@ -20,9 +20,24 @@ namespace :versions do
       files = io.read.split(/\n/)
       io.close
       
-      files.each do |file|
+      files.map! do |file|
         #each file will be something like "crawl_reviewed/disqus.com/Privacy Policy.txt"
-        # site = Site.where(name: .downcase).first
+        ary = file.split(/\//)
+        {path: file, site: ary[1], policy: ary[2]}
+      end
+
+      # site = Site.where(name: file[:site].downcase).first
+      files.each do |file|
+        policy = Site.where(name: file[:site].downcase).first.policies.where(name: file[:policy].sub(".txt","")).first
+        version = policy.versions.where(created_at: commit[:date].beginning_of_day..commit[:date].end_of_day).first
+        
+        if version.nil?
+          old_policy = IO.popen("cd #{path}; git show #{commit[:sha]}:'#{file[:path]}'").read
+          version = policy.versions.new(previous_policy: old_policy)
+          version.created_at = commit[:date]
+          version.save
+        end
+
       end
     end
           
