@@ -109,4 +109,13 @@ describe Policy do
     end 
     
   end # updating a policy
+
+  describe ".reviewed" do
+    let!(:policies) { FactoryGirl.create_list(:policy, 3) }
+    it "scopes to policies with needs_revision == nil" do
+      policies[0].needs_revision = nil
+      policies[0].save
+      expect(Policy.reviewed.count).to eq(1)
+    end
+  end
 end

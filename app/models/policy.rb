@@ -25,6 +25,10 @@ class Policy < ActiveRecord::Base
   
   validates :name, :url, presence: true
   validates :xpath, uniqueness: {:scope => :url}
+
+  def self.reviewed
+    where(needs_revision: nil)
+  end
   
   after_create do |p|
     p.update_current_version
