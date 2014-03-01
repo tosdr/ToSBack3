@@ -39,9 +39,9 @@ describe Site do
   describe ".reviewed" do
     let!(:site) { FactoryGirl.create(:site_with_policies) }
     it "scopes to sites with reviewed policies" do
-      site.policies[0].needs_revision = nil
+      site.policies[0].needs_revision = true
       site.policies[0].save
-      expect(Site.reviewed.count).to eq(1)
+      expect(Site.reviewed.count).to eq(4)
     end
   end
 end

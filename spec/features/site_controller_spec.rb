@@ -2,8 +2,15 @@ require 'spec_helper'
 
 describe "Site Controller" do
   describe "site_path#index" do
-    before(:all) { 31.times { FactoryGirl.create(:site) } }
-    after(:all)  { Site.delete_all }    
+    before(:all) do
+      32.times { FactoryGirl.create(:site_with_policies, policies_count: 1) }
+      Site.all[10].policies.first.update_attribute(:needs_revision, true)
+    end
+    let!(:unreviewed) { Site.all[10] }
+    after(:all) do
+      Site.delete_all
+      Policy.delete_all
+    end
     
     before(:each) do
       visit sites_path
@@ -13,8 +20,8 @@ describe "Site Controller" do
       page.should have_selector('li', text: Site.first.name)
     end
     
-    it "doesn't contain the 31st site (pagination)" do
-      page.should_not have_selector('li', text: Site.last.name)
+    it "doesn't contain the unreviewed site (scope)" do
+      page.should_not have_selector('li', text: unreviewed.name)
     end
 
     it "lists page numbers" do

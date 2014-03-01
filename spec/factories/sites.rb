@@ -10,14 +10,14 @@ FactoryGirl.define do
       end
 
       after(:create) do |site, evaluator|
-        evaluator.policies_count.times { site.policies << FactoryGirl.create(:policy)}
+        evaluator.policies_count.times { site.policies << FactoryGirl.create(:policy, needs_revision: nil)}
       end
       
       # This allows us to do:
       # 
       # FactoryGirl.create(:site).policies.length # 0
       # FactoryGirl.create(:site_with_policies).policies.length # 5
-      # FactoryGirl.create(:site_with_policies_with_policies, policies_count: 15).policies.length # 15
+      # FactoryGirl.create(:site_with_policies, policies_count: 15).policies.length # 15
       
     end  
   end
