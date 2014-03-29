@@ -11,6 +11,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
   config.include RSpec::Rails::RequestExampleGroup, type: :feature
+  config.filter_run_excluding :disabled => true
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:

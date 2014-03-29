@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "CrawlController" do
+describe "CrawlController", disabled: true do
   before { @crawl = FactoryGirl.create(:crawl) }
   subject { page }
 

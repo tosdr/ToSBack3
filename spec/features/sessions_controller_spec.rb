@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "SessionsController" do
+describe "SessionsController", disabled: true do
   subject { page }
   
   describe "visiting signin_path" do
