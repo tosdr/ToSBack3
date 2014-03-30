@@ -4,6 +4,6 @@ class SitesController < ApplicationController
   end
   
   def show
-    @site = Site.find(params[:id])
+    @site = Site.includes(:policies).find(params[:id])
   end
 end

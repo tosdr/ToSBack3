@@ -4,7 +4,7 @@ describe "PoliciesController" do
   
   subject { page }
   
-  describe "visiting #index" do
+  describe "visiting #index", disabled: true do
     before(:all) { 31.times { FactoryGirl.create(:policy) } }
     after(:all)  { Policy.delete_all }
 
