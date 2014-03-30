@@ -23,7 +23,7 @@ namespace :xml do
         doc_hash[:name] = doc.at_xpath("./@name").to_s
         doc_hash[:url] = doc.at_xpath("./url/@name").to_s
         doc_hash[:xpath] = (doc.at_xpath("./url/@xpath").to_s == "") ? nil : doc.at_xpath("./url/@xpath").to_s
-        doc_hash[:nr] = (doc.at_xpath("./url/@reviewed").to_s == "") ? true : nil
+        doc_hash[:nr] = ((doc.at_xpath("./url/@reviewed").to_s == "") || (doc.at_xpath("./url/@reviewed").to_s == "false")) ? true : nil
         doc_hash[:lang] = (doc.at_xpath("./url/@lang").to_s == "") ? nil : doc.at_xpath("./url/@lang").to_s
         doc_hash[:txt_file] = (doc_hash[:nr] == nil) ? "crawl_reviewed/#{site.name}/#{doc_hash[:name]}.txt" : "crawl/#{site.name}/#{doc_hash[:name]}.txt"
 
