@@ -4,5 +4,6 @@ FactoryGirl.define do
   factory :notification do
     site "example.com"
     name "Privacy Policy"
+    diff_url "http://example.com/some_diff_url"
   end
 end

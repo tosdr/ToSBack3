@@ -6,6 +6,7 @@ class Notification < ActiveRecord::Base
   validates :name, :site, :diff_url, presence: true
     
   def image_from_sitename
-    "logo/" + site.gsub(/\.([^.]*)$/,".png")
+    path = "logo/" + site.gsub(/\.([^.]*)$/,".png")
+    return Rails.application.assets.find_asset(path).nil? ? 'logo/default.png' : path
   end
 end
