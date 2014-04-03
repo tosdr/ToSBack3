@@ -64,7 +64,7 @@ img {
   height: 53px;
   width: 180px;
 
-  background-image: url(logo.png);
+  background-image: image-url('logo.png');
   text-indent: -5000px;
 }
 
@@ -76,7 +76,7 @@ img {
   height: 34px;
   width: 296px;
 
-  background-image: url(tagline.png);
+  background-image: image-url('tagline.png');
   text-indent: -5000px;  
 }
 
@@ -98,7 +98,7 @@ img {
 #eff_logo {
   width:53px;
   height:35px;
-  background-image: url(../eff_logo.png);
+  background-image: image-url('eff_logo.png');
   text-indent: -5000px;
   float:left;
   margin-left:12px;
@@ -108,7 +108,7 @@ img {
 #tosdr_logo {
   width:32px;
   height:32px;
-  background-image: url(../tosdr_logo.png);
+  background-image: image-url('tosdr_logo.png');
   text-indent: -5000px;
   float:left;
   margin-left:12px;
@@ -301,7 +301,7 @@ img {
 
   width: 306px;
   height: 30px;
-  background-image: url(footer.png);
+  background-image: image-url('footer.png');
   
   text-indent: -5000px;
 }
@@ -313,107 +313,10 @@ img {
 
   width: 190px;
   height: 32px;
-  background-image: url(tosdr-logo-32-w.png);
+  background-image: image-url('tosdr-logo-32-w.png');
   
   text-indent: -5000px;
 }
-
-
-/* DIFF styles */
-
-.left_side, .right_side {
-    vertical-align: top;
-}
-
-#diff .left_side del    {
-    background-color: #9cf;
-}
-
-#diff .left_side ins {
-	display: none;
-}
-
-#diff .right_side del    {
-	display: none;
-}
-
-#diff .right_side ins    {
-    background-color: #ff8;
-}
-
-ins {
-    background-color: #ff8;
-}
-
-del {
-    background-color: #9cf;
-}
-
-#diffheader,
-#diff {
-  width: 765px;
-}
-
-#diff tr {
-  word-break: break-all;  
-}
-
-#diffheader td.left_side,
-#diff td.left_side,
-#diffheader td.right_side,
-#diff td.right_side {
-  width: 345px;
-  vertical-align: top;
-}
-
-#diffheader td.spacer,
-#diff td.spacer {
-  width: 45px;
-}
-
-#diffheader .befaft {
-  font-size: 36px;
-  font-weight: bold;
-}
-
-#diffheader h3 a {
-  font-size: 18px;
-}
-
-#diffheader .when,
-#diffheader .key {
-  color: #666;
-  font-size: 14px;
-  line-height: 20px;
-}
-
-#diffheader .diffchange {
-  color: #333;
-}
-
-#diffheader .left .key .blop,
-.left .diffchange p,
-.left .diffchange li,
-.left .diffchange {
-  background: #9cf;
-}
-
-#diffheader .right .key .blop,
-.right .diffchange p,
-.right .diffchange li,
-.right .diffchange {
-  background-color: #ff8;
-}
-
-table#diff .counter {
-  background-color: #ddd;
-  color: #666;
-  width: 20px;
-  font-family: courier;
-  font-size: 10px;
-  vertical-align: top;
-}
-
 
 /* ABOUT page */
 

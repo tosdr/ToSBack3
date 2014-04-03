@@ -1,0 +1,20 @@
+<!-- Old Bootstrap header!
+     keeping for reference later -->
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "TOSBack", root_path, class: "brand" %>
+      <nav>
+        <ul class="nav pull-right">
+          <% if signed_in? %>
+            <li><%= link_to "Subscriptions", user_path(current_user) %></li>
+            <li><%= link_to "Account", edit_user_path(current_user) %></li>			
+            <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
+          <% else %>
+            <li><%= link_to "Sign in", signin_path %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

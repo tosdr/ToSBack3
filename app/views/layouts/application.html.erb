@@ -1,25 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TOSBack</title>
+  <%= csrf_meta_tags %>
+  <title>TOSBack | The Terms-Of-Service Tracker</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
 </head>
 <body>
-<%= render 'layouts/header' %>
 
-<% if flash.any? %>
-	<div class="container" id="flash">
-	<% flash.each do |key, value| %>
-	  <div class="alert alert-<%= key %>"><%= value %></div>
-	<% end %>
-	</div>
-<% end %>
+<div id="page">
+  
+  <%= render 'layouts/header' %>
 
-<div class="container" id="main">
-<%= yield %>
-</div>
+  <% if flash.any? %>
+    <div class="container" id="flash">
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+    </div>
+  <% end %>
 
-</body>
-</html>
+<div id="body">
+
+  <div id="mission" class="block">
+    <h2>TOSBack.org is Under Construction</h2>
+    <p>
+                TOSBack is a collaboration between the <a href='https://www.eff.org/'>EFF</a>, the <a href='http://www.internetsociety.org/'>Internet Society</a>, and <a href='http://tosdr.org/'>ToS;DR</a>. Every day, we check the Terms and Policies of many online services to see if any of them have changed. The project is currently in beta as we are working on some improvements to ensure greater reliability and coverage. For now, please double check any results with	the website operator before relying on them for important legal or journalistic purposes.
+    </p>
+  </div>
+
+  <%= render 'layouts/sidebar' %>
+
+	<div id="content" class="narrow">
+			
+		<%= yield %>	
+			
+	</div><!--narrow content -->
+</div><!-- body-->
+
+<%= render 'layouts/footer' %>
+
+</div><!-- page -->
+
+</body></html>
