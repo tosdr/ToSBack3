@@ -32,8 +32,6 @@ GEM
       rake
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
-    bootstrap-sass (2.3.0.0)
-      sass (~> 3.2)
     builder (3.0.4)
     capybara (2.0.2)
       mime-types (>= 1.16)
@@ -170,7 +168,6 @@ PLATFORMS
 DEPENDENCIES
   annotate (~> 2.5.0)
   bcrypt-ruby (~> 3.0.0)
-  bootstrap-sass (~> 2.3.0.0)
   capybara (~> 2.0.2)
   coffee-rails (~> 3.2.1)
   diffy (~> 2.1.3)
