@@ -1,29 +1,23 @@
+<% content_for :sidebar do %>
+  <div class='block'>
+    <div id="blockbody">
+      <h3>View version from:</h3>
+      <ul class="versions">
+        <% @versions.each do |v| %>
+          <li><%= link_to v.created_at.to_date.to_formatted_s(:long), policy_version_path(@policy,v.id) %></li>
+        <% end %>
+        <!-- TODO link to diff path -->
+      </ul>
+      <h4><%= link_to "View all versions...", policy_versions_path(@policy) %></h4>
+    </div>
+  </div>
+<% end %>
+
 <h1><%= @policy.name %></h1>
-<div class="row">
-	<div class="span6">
-		<h3>from <%= @version.created_at.to_date.to_formatted_s(:long) %></h3>
-	</div>
-	<div class="span6">
-		<%= link_to "Differences with current", policy_version_path(@policy,@version,diff: "current"), class: "btn" %>
-		<%= link_to "Differences with previous", policy_version_path(@policy,@version, diff: "previous"), class: "btn" %>
-	</div>
-</div>
-<div class="row">
-	<div class="span3">
-		<div id="version_links">
-			<h4>Recent versions:</h4>
-			<ul class="versions">
-				<% @versions.each do |v| %>
-					<li><%= link_to v.created_at.to_date.to_formatted_s(:long), policy_version_path(@policy,v.id) %></li>
-				<% end %>
-			</ul>
-			<%= link_to "All versions...", policy_versions_path(@policy) %>
-			<!-- TODO link to diff path -->
-		</div>
-	</div>
-	<div class="span9">
-		<div id="previous_policy">
-			<%= @content %>
-		</div>
-	</div>
+<h3>from <%= @version.created_at.to_date.to_formatted_s(:long) %></h3>
+<%= link_to "Differences with current", policy_version_path(@policy,@version,diff: "current"), class: "btn" %>
+<%= link_to "Differences with previous", policy_version_path(@policy,@version, diff: "previous"), class: "btn" %>
+
+<div id="previous_policy">
+  <%= @content %>
 </div>

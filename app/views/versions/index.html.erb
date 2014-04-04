@@ -1,17 +1,25 @@
-<h1>All versions of <%= @policy.name %></h1>
-<h3><%= link_to "Back to current policy...", policy_path(@policy) %></h3>
-<div class="row">
-  <div class="span3">
-	<ul class="policy_versions">
-      <% @versions.each do |v| %>
-        <li><%= link_to v.created_at.to_date.to_formatted_s(:long), [@policy, v] %></li>
-      <% end %>
-    </ul>
+<% content_for :sidebar do %>
+  <div class='block'>
+    <div id="blockbody">
+      <h3>View version from:</h3>
+      <ul class="versions">
+        <% @versions.each do |v| %>
+          <li><%= link_to v.created_at.to_date.to_formatted_s(:long), policy_version_path(@policy,v.id) %></li>
+        <% end %>
+        <!-- TODO: make a partial from this sidebar if we're using in many views -->
+      </ul>
+      <h4><%= link_to "Back to current policy...", policy_path(@policy) %></h4>
+    </div>
   </div>
+<% end %>
+
+<h3>Here's the list of versions that we have archived for <%= @policy.name %>!</h3>
+<p>Choose a version to see the archived copy and compare what's been changed!</p>
+
+<ul class="policy_versions">
+  <% @versions.each do |v| %>
+    <li><%= link_to v.created_at.to_date.to_formatted_s(:long), [@policy, v] %></li>
+  <% end %>
+</ul>
 <!-- TODO: make this look better/change content on this page to have version stats or something -->
-  <div class="span9">
-	<h3>Here's the list of versions that we have archived!</h3>
-	<p>Choose a version on the left to see the archived copy, and then compare what's been changed.</p>
-  </div>
-</div>
 <%= will_paginate @versions %>

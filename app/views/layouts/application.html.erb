@@ -29,7 +29,13 @@
     </p>
   </div>
 
-  <%= render 'layouts/sidebar' %>
+  <div id="sidebar">
+    <% if content_for?(:sidebar) %>
+      <%= yield :sidebar %>
+    <% end %>
+
+    <%= render 'layouts/sidebar' %>
+  </div>
 
 	<div id="content" class="narrow">
 			
