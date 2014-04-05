@@ -41,8 +41,8 @@ describe "Site Controller" do
     context "when site does not have policies" do
       let!(:site) { FactoryGirl.create(:site) }
       
-      it "contains the site's title" do
-        page.should have_selector("h1", text: site.name )
+      it "contains the site's capitalized title" do
+        page.should have_selector("h1", text: site.name.capitalize )
       end
       
       it "displays message in place of policies"

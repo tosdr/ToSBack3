@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "UsersController" do
+describe "UsersController", disabled: true do
   subject { page }
   
   describe "visiting signup_path" do
