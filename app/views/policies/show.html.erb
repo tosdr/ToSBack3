@@ -21,7 +21,7 @@
 <% end %>
 
 <h1><%= @policy.name %></h1>
-<h3>Updated on <%= @policy.created_at.to_date.to_formatted_s(:long) %></h3>
+<h3>ToSBack stored this version on <%= @policy.created_at.to_date.to_formatted_s(:long) %></h3>
 
 <div id="policy_current">
   <%= @policy.detail.html_safe %>
