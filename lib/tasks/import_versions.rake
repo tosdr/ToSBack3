@@ -28,6 +28,9 @@ namespace :versions do
 
       # site = Site.where(name: file[:site].downcase).first
       files.each do |file|
+	file[:policy] = "Terms of Service.txt" if file[:policy] == "Terms Of Service.txt" 
+	#fixes issue with some of google's other service's old versions not importing
+
         policy = Site.where(name: file[:site].downcase).first.policies.where(name: file[:policy].sub(".txt","")).first
         version = policy.versions.where(created_at: commit[:date].beginning_of_day..commit[:date].end_of_day).first
         

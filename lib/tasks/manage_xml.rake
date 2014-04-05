@@ -43,11 +43,14 @@ namespace :xml do
           end
         end # if p.nil?
         
+        #sets date on version to the correct commit date from git
         unless p.needs_revision == true
           date_of_crawl = IO.popen("cd #{path}; git log -1 --format='%cd' '#{doc_hash[:txt_file]}'").read
           version = p.versions.first
           version.created_at = DateTime.parse(date_of_crawl)
           version.save
+          p.created_at = DateTime.parse(date_of_crawl)
+          p.save
         end
       
         unless p.sites.include?(site)
