@@ -1,5 +1,5 @@
 [1]: https://www.eff.org/deeplinks/2013/01/campus-party-hackathon-making-rule-contribution-tosback "Contributing Rules to ToSBack"
-[4]: https://github.com/tosdr/ToSBack3/wiki/Help-Us-Develop-the-New-ToSBack! "Help us develop ToSBack!"
+[4]: https://github.com/tosdr/ToSBack3/wiki/Help-Us-Develop-the-New-ToSBack "Help us develop ToSBack!"
 [5]: http://gun.io/blog/how-to-github-fork-branch-and-pull-request/ "How to branch and submit a pull request"
 [setup]: https://github.com/tosdr/ToSBack3/wiki/Setting-Up-the-Development-Environment "Setting Up the ToSBack Development Environment"
 
