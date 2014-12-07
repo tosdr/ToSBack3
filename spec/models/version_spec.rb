@@ -2,12 +2,13 @@
 #
 # Table name: versions
 #
-#  id              :integer          not null, primary key
-#  policy_id       :integer
-#  previous_policy :text
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  full_page       :text
+#  id         :integer          not null, primary key
+#  policy_id  :integer
+#  text       :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  full_page  :text
+#  xpath      :string(255)
 #
 
 require 'spec_helper'
