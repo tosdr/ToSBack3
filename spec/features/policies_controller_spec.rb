@@ -76,6 +76,15 @@ describe "PoliciesController" do
         it { should have_selector('h3', text: @policy.versions[5].created_at.to_date.strftime("%B %-d, %Y")) }
       end
     end #many 
+
+    context "when policy has no versions" do
+      before do
+        @policy = FactoryGirl.create(:policy_with_sites_and_versions, sites_count: 1, versions_count: 0)
+        visit policy_path(@policy)
+      end
+
+      it { should have_content("Sorry") }
+    end #no versions
          
   end #visiting #show
 end

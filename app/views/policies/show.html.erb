@@ -11,7 +11,7 @@
     <div id="blockbody">
       <h3>View version from:</h3>
       <ul class="versions">
-        <% @versions.each do |v| %>
+        <% @policy_presenter.versions.each do |v| %>
           <li><%= link_to v.created_at.to_date.to_formatted_s(:long), policy_version_path(@policy,v.id) %></li>
         <% end %>
       </ul>
@@ -20,9 +20,9 @@
   </div>
 <% end %>
 
-<h1><%= @policy.name %></h1>
-<h3>ToSBack stored this version on <%= @policy.versions.first.created_at.to_date.to_formatted_s(:long) %></h3>
+<h1><%= @policy_presenter.name %></h1>
+<%= @policy_presenter.default_date %>
 
 <div id="policy_current">
-  <%= @policy.versions.first.text.html_safe %>
+  <%= @policy_presenter.default_version_text %>
 </div>
