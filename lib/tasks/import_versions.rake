@@ -30,15 +30,16 @@ namespace :versions do
       files.each do |file|
 	file[:policy] = "Terms of Service.txt" if file[:policy] == "Terms Of Service.txt" 
 	#fixes issue with some of google's other service's old versions not importing
-	file[:policy] = "Microsoft Services Agreement.txt" if file[:policy] == "Terms of Service.txt" && file[:site].downcase == "msn.com"
+	#file[:policy] = "Microsoft Services Agreement.txt" if file[:policy] == "Terms of Service.txt" && file[:site].downcase == "msn.com"
         # another cheap fix, but we're just working from one dataset so I'll allow it.
-
+        # ^no longer needed? But I just added this... o_O
+        
         policy = Site.where(name: file[:site].downcase).first.policies.where(name: file[:policy].sub(".txt","")).first
         version = policy.versions.where(created_at: commit[:date].beginning_of_day..commit[:date].end_of_day).first
         
         if version.nil?
           old_policy = IO.popen("cd #{path}; git show #{commit[:sha]}:'#{file[:path]}'").read
-          version = policy.versions.new(previous_policy: old_policy)
+          version = policy.versions.new(text: old_policy)
           version.created_at = commit[:date]
           version.save
         end

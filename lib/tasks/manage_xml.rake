@@ -27,18 +27,19 @@ namespace :xml do
         doc_hash[:lang] = (doc.at_xpath("./url/@lang").to_s == "") ? nil : doc.at_xpath("./url/@lang").to_s
         doc_hash[:txt_file] = (doc_hash[:nr] == nil) ? "crawl_reviewed/#{site.name}/#{doc_hash[:name]}.txt" : "crawl/#{site.name}/#{doc_hash[:name]}.txt"
 
-        p = Policy.where(url:doc_hash[:url], xpath: doc_hash[:xpath]).first
+        p = Policy.where(url:doc_hash[:url], name: doc_hash[:name]).first
         if p.nil?
           p = Policy.create do |plcy|
             plcy.name = doc_hash[:name] 
             plcy.url = doc_hash[:url]
-            plcy.xpath = doc_hash[:xpath]
+            #plcy.xpath = doc_hash[:xpath]
             plcy.needs_revision = doc_hash[:nr]
             plcy.lang = doc_hash[:lang] 
             #TODO see if chomp is necessary for making the diffs work right once the
             # new crawler is finished
             File.open(path+doc_hash[:txt_file]) do |crawl|
-              plcy.detail = crawl.read.chomp
+              plcy.versions.new(xpath: doc_hash[:xpath], text: crawl.read.chomp)
+              #plcy.detail = crawl.read.chomp
             end
           end
         end # if p.nil?
@@ -74,7 +75,7 @@ namespace :xml do
       site.policies.each do |policy|
         rule_file.print "  <docname name=\"#{CGI.escape_html(policy.name)}\">\n"
         rule_file.print "    <url name=\"#{CGI.escape_html(policy.url)}\""
-        rule_file.print " xpath=\"#{policy.xpath}\"" unless policy.xpath.nil?
+        rule_file.print " xpath=\"#{policy.versions.first.xpath}\"" unless policy.xpath.nil?
         rule_file.print " lang=\"#{policy.lang}\"" unless policy.lang.nil?
         rule_file.print " reviewed=\"true\"" unless policy.needs_revision
         rule_file.print ">\n"

@@ -16,7 +16,7 @@ class Version < ActiveRecord::Base
   
   default_scope order("created_at DESC")  
   
-  attr_accessible :text, :full_page
+  attr_accessible :text, :full_page, :xpath
   
   validates :policy, :text, presence: true
   
