@@ -10,10 +10,11 @@
 #
 
 class Commitment < ActiveRecord::Base
-  belongs_to :site
-  belongs_to :policy
+  belongs_to :site, inverse_of: :commitments
+  belongs_to :policy, inverse_of: :commitments
   attr_protected :policy_id, :site_id
   
-  validates :policy_id, :site_id, presence: true
+  #commented out next line due to problems validating new policies
+  #validates :policy_id, :site_id, presence: true
   validates :policy_id, uniqueness: {:scope => :site_id, :message => "This site already has this policy"}
 end

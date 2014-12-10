@@ -6,7 +6,11 @@ describe "PoliciesController" do
   
   describe "visiting #index", disabled: true do
     before(:all) { 31.times { FactoryGirl.create(:policy) } }
-    after(:all)  { Policy.delete_all }
+    after(:all) do
+      Policy.delete_all
+      Site.delete_all
+      Commitment.delete_all
+    end
 
     before(:each) do
       visit policies_path
@@ -39,7 +43,7 @@ describe "PoliciesController" do
       # let(:changes) { Nokogiri::HTML(page.source).xpath("//div[@id='policy_changes']/node()").to_s }
       
       it { should have_selector('h1', text: @policy.name) }
-      it { should have_selector('h3', text: @policy.updated_at.to_date.strftime("%B %-d, %Y")) }
+      it { should have_selector('h3', text: @policy.versions.first.created_at.to_date.strftime("%B %-d, %Y")) }
       
       it "paginates site links to the first 10" do
         @policy.sites.each_with_index do |site, i|

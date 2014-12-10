@@ -16,9 +16,8 @@
 
 <h1><%= @policy.name %></h1>
 <h3>from <%= @version.created_at.to_date.to_formatted_s(:long) %></h3>
-<%= link_to "Differences with current", policy_version_path(@policy,@version,diff: "current"), class: "btn" %>
-<%= link_to "Differences with previous", policy_version_path(@policy,@version, diff: "previous"), class: "btn" %>
 
+<!-- TODO change id to 'text' and update css -->
 <div id="previous_policy">
-  <%= @content %>
+  <%= @version.text.html_safe %>
 </div>
