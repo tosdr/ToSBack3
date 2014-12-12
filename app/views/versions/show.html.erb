@@ -2,10 +2,7 @@
   <div class='block'>
     <div id="blockbody">
       <h3>View version from:</h3>
-      <ul class="versions">
-        <% @versions.each do |v| %>
-          <li><%= link_to v.created_at.to_date.to_formatted_s(:long), policy_version_path(@policy,v.id) %></li>
-        <% end %>
+        <%= render 'shared/list_versions', list_object: @versions, ul_class: "versions" %>
         <!-- TODO link to diff path -->
       </ul>
       <h4><%= link_to "View all versions...", policy_versions_path(@policy) %></h4>
@@ -15,9 +12,9 @@
 <% end %>
 
 <h1><%= @policy.name %></h1>
-<h3>from <%= @version.created_at.to_date.to_formatted_s(:long) %></h3>
+<h3>from <span id="policy_date"><%= @version.created_at.to_date.to_formatted_s(:long) %></span></h3>
 
 <!-- TODO change id to 'text' and update css -->
-<div id="previous_policy">
+<div id="policy_text">
   <%= @version.text.html_safe %>
 </div>

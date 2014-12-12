@@ -1,0 +1,6 @@
+<% # render 'shared/list_each_as_link', list_object: @whatevz, ul_class: "whatevz" %>
+<ul class="<%= ul_class %>">
+	<% list_object.each do |object| %>
+		<li><%= link_to object.created_at.to_date.to_formatted_s(:long), policy_version_path(@policy, object.id), remote: true %></li>
+	<% end %>
+</ul>

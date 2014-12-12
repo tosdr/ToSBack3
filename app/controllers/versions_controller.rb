@@ -1,5 +1,7 @@
 class VersionsController < ApplicationController
   before_filter :get_policy
+  respond_to :html
+  respond_to :js, only: [:show]
   
   def index
     @versions = @policy.versions.paginate(page: params[:page])
@@ -16,6 +18,8 @@ class VersionsController < ApplicationController
     #elsif params[:diff] == "previous"
       #@content = @version.changes_from_previous
     #end
+
+    respond_with(@version, only: :text)
   end
   
   private
