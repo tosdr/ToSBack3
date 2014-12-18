@@ -1,7 +1,7 @@
 class VersionsController < ApplicationController
   before_filter :get_policy
   respond_to :html
-  respond_to :js, only: [:show]
+  #respond_to :js, :json, only: [:show]
   
   def index
     @versions = @policy.versions.paginate(page: params[:page])
@@ -19,7 +19,7 @@ class VersionsController < ApplicationController
       #@content = @version.changes_from_previous
     #end
 
-    respond_with(@version, only: :text)
+    #respond_with(@version, only: [:text, :created_at])
   end
   
   private

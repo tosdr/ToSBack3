@@ -11,7 +11,7 @@
     <div id="blockbody">
       <h3>View version from:</h3>
       <ul class="versions">
-        <%= render 'shared/list_versions', list_object: @policy_presenter.versions, ul_class: "versions" %>
+        <%= render @policy_presenter.versions %>
       </ul>
       <h4><%= link_to "View all versions...", policy_versions_path(@policy) %></h4>
     </div>
@@ -19,8 +19,9 @@
 <% end %>
 
 <h1><%= @policy_presenter.name %></h1>
-<%= @policy_presenter.default_date %>
+<span id="date_text"><%= @policy_presenter.default_date %></span>
 
+<div id="policy_diff"></div>
 <div id="policy_text">
   <%= @policy_presenter.default_version_text %>
 </div>

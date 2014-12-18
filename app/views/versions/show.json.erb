@@ -1,0 +1,5 @@
+<%= response = {
+  created_at: @version.created_at.to_date.to_formatted_s(:long),
+  text: @version.text.html_safe
+}
+response.to_json.html_safe %>
