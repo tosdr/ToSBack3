@@ -18,6 +18,9 @@
   </div>
 <% end %>
 
+<%= content_tag :div, id: 'version_info', data: {current_version: @policy.versions.first.id} do %>
+<% end %>
+
 <h1><%= @policy_presenter.name %></h1>
 <span id="date_text"><%= @policy_presenter.default_date %></span>
 

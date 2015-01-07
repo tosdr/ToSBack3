@@ -1,2 +1,2 @@
-<li><%= link_to version.created_at.to_date.to_formatted_s(:long), policy_version_path(@policy, version.id), class: "version_link", remote: true, 'data-type' => 'json' %>
-(<%= link_to "diff", policy_version_path(@policy, version.id), class: "version_link", remote: true, 'data-type' => 'json', 'data-diff-link' => 'true' %>)</li>
+<li><%= link_to version.created_at.to_date.to_formatted_s(:long), policy_version_path(@policy, version.id), class: "version_link", id: "version_link_"+version.id.to_s, remote: true, 'data-type' => 'json' %>
+<%= link_to "(diff)", policy_version_path(@policy, version.id), class: "version_link", id: "version_diff_link_"+version.id.to_s, remote: true, 'data-type' => 'json', 'data-diff-link' => 'true' %></li>

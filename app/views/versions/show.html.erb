@@ -15,6 +15,9 @@
 <h1><%= @policy.name %></h1>
 <h3><span id="date_text">ToSBack stored this version on <%= @version.created_at.to_date.to_formatted_s(:long) %></span></h3>
 
+<%= content_tag :div, id: 'version_info', data: {current_version: @version.id} do %>
+<% end %>
+
 <div id="policy_diff"></div>
 <!-- TODO change id to 'text' and update css -->
 <div id="policy_text">

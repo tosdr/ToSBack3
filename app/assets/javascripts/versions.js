@@ -43,29 +43,40 @@ $(function(){
 
 var TosbackDiffHandler = {
   init: function(){
-    // TODO #policy_text only exists on policy page
-    this.currentVersion = $("#policy_text").html().trim();
+    // TODO need access to version loaded from server initally
+    this.currentVersion = {};
+    this.currentVersion.id = $("#version_info").data().currentVersion;
+    this.currentVersion.text = $("#policy_text").html().trim();
     this.dmp = new diff_match_patch();
     //console.log("init");
+    this.updateFormatting(this.currentVersion.id);
   },
   showDiff: function(diff_version){
     //console.log("showDiff");
-    this.diff = this.dmp.diff_main(this.currentVersion, diff_version.text);
+    this.diff = this.dmp.diff_main(this.currentVersion.text, diff_version.text);
     this.dmp.diff_cleanupSemantic(this.diff);
 
     $("#policy_diff").html(this.dmp.diff_tosbackHtml(this.diff));
     $("#date_text").html("Diff with " + diff_version.created_at );
     $("#policy_text").hide();
     $("#policy_diff").show();
+
+    this.updateFormatting(diff_version.id);
   },
   showPolicy: function(policy){
     if (policy != undefined) {
-      this.currentVersion = policy.text;
-      $("#policy_text").html(policy.text);
-      $("#date_text").html("ToSBack stored this version on " + policy.created_at );
+      this.currentVersion = policy;
+      $("#policy_text").html(this.currentVersion.text);
+      $("#date_text").html("ToSBack stored this version on " + this.currentVersion.created_at );
     }
 
     $("#policy_diff").hide();
     $("#policy_text").show();
+    this.updateFormatting(this.currentVersion.id);
+  },
+  updateFormatting: function(version_id){
+    $(".version_link").show();
+    $("#version_diff_link_" + version_id).hide();
+    $("#version_diff_link_" + this.currentVersion.id).hide();
   }
 };
