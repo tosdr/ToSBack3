@@ -7,6 +7,6 @@ class Notification < ApplicationRecord
     
   def image_from_sitename
     path = "logo/" + site.gsub(/\.([^.]*)$/,".png")
-    return ActionController::Base.asset_digest_path(path).nil? ? 'logo/default.png' : path
+    return ActionController::Base.helpers.asset_digest_path(path).nil? ? 'logo/default.png' : path
   end
 end
