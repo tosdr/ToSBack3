@@ -8,10 +8,10 @@
 #  updated_at :datetime         not null
 #
 
-class Site < ActiveRecord::Base
+class Site < ApplicationRecord
   has_many :commitments
   has_many :policies, through: :commitments
-  attr_accessible :name
+  #attr_accessible :name
   
   validates :name, presence: true, uniqueness: {case_sensitive: false}
 

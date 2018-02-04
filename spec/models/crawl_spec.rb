@@ -12,9 +12,9 @@
 
 require 'spec_helper'
 
-describe Crawl do
-  # let(:crawl) { FactoryGirl.build(:crawl) }
-  before(:each) { @crawl = FactoryGirl.create(:crawl) }
+RSpec.describe Crawl do
+  # let(:crawl) { FactoryBot.build(:crawl) }
+  before(:each) { @crawl = FactoryBot.create(:crawl) }
   
   it { should respond_to(:policy) }
   
@@ -28,8 +28,8 @@ describe Crawl do
   end
   
   context "when crawl exists already" do
-    # let!(:current_crawl) { FactoryGirl.create(:crawl) }
-    before(:each) { @dup = FactoryGirl.build(:crawl, policy_id: @crawl.policy_id) }
+    # let!(:current_crawl) { FactoryBot.create(:crawl) }
+    before(:each) { @dup = FactoryBot.build(:crawl, policy_id: @crawl.policy_id) }
     
     it "is invalid with a duplicate policy_id" do
       @dup.should_not be_valid

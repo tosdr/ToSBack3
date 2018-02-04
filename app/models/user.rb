@@ -11,15 +11,17 @@
 #  password_digest :string(255)
 #
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   has_many :subscriptions
   has_many :policies, through: :subscriptions
   
   has_secure_password
   
-  attr_accessible :email, :name, :password, :password_confirmation
+  #attr_accessible :email, :name, :password, :password_confirmation
   
-  VALID_EMAIL_REGEX = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
+  #VALID_EMAIL_REGEX = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
+  VALID_EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+
   validates :name, :email, presence: true, length: {maximum: 50}
   validates :email, presence: true, format: {with: VALID_EMAIL_REGEX}, uniqueness: {case_sensitive: false}
   validates :password, presence: true, length: {minimum: 8}

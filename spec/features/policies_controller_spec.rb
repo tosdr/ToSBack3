@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe "PoliciesController" do
+RSpec.describe "PoliciesController", disabled: true do
   
   subject { page }
   
   describe "visiting #index", disabled: true do
-    before(:all) { 31.times { FactoryGirl.create(:policy) } }
+    before(:all) { 31.times { FactoryBot.create(:policy) } }
     after(:all)  { Policy.delete_all }
 
     before(:each) do
@@ -33,7 +33,7 @@ describe "PoliciesController" do
 
     context "when policy has many sites and versions" do
       before do
-        @policy = FactoryGirl.create(:policy_with_sites_and_versions, sites_count: 14, versions_count: 17)
+        @policy = FactoryBot.create(:policy_with_sites_and_versions, sites_count: 14, versions_count: 17)
         visit policy_path(@policy)
       end
       # let(:changes) { Nokogiri::HTML(page.source).xpath("//div[@id='policy_changes']/node()").to_s }

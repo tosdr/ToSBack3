@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe "VersionsController" do
+RSpec.describe "VersionsController", disabled: true do
   
   subject { page }
     
   describe "visiting versions#index" do
-    before(:each) { @policy = FactoryGirl.create(:policy_with_sites_and_versions, sites_count: 14, versions_count: 32) }
+    before(:each) { @policy = FactoryBot.create(:policy_with_sites_and_versions, sites_count: 14, versions_count: 32) }
     before { visit policy_versions_path(@policy) }
     
     it "doesn't contain the 32nd version (pagination)" do
@@ -25,7 +25,7 @@ describe "VersionsController" do
   describe "visiting versions#show" do
 
     context "when policy has many sites and versions" do
-      before(:each) { @policy = FactoryGirl.create(:policy_with_sites_and_versions, sites_count: 14, versions_count: 32) }
+      before(:each) { @policy = FactoryBot.create(:policy_with_sites_and_versions, sites_count: 14, versions_count: 32) }
       before { @version = @policy.versions[2] }
       before { visit policy_version_path(@policy,@version) }
       

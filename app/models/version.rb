@@ -10,12 +10,12 @@
 #  full_page       :text
 #
 
-class Version < ActiveRecord::Base
+class Version < ApplicationRecord
   belongs_to :policy
   
-  default_scope order("created_at DESC")  
+  default_scope { order("created_at DESC") }  
   
-  attr_accessible :previous_policy, :full_page
+  #attr_accessible :previous_policy, :full_page
   
   validates :policy_id, :previous_policy, presence: true
   

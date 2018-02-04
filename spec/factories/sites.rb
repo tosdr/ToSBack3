@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :site do
     sequence(:name) {|n| "example#{n}.com"}
     
@@ -10,14 +10,14 @@ FactoryGirl.define do
       end
 
       after(:create) do |site, evaluator|
-        evaluator.policies_count.times { site.policies << FactoryGirl.create(:policy, needs_revision: nil)}
+        evaluator.policies_count.times { site.policies << FactoryBot.create(:policy, needs_revision: nil)}
       end
       
       # This allows us to do:
       # 
-      # FactoryGirl.create(:site).policies.length # 0
-      # FactoryGirl.create(:site_with_policies).policies.length # 5
-      # FactoryGirl.create(:site_with_policies, policies_count: 15).policies.length # 15
+      # FactoryBot.create(:site).policies.length # 0
+      # FactoryBot.create(:site_with_policies).policies.length # 5
+      # FactoryBot.create(:site_with_policies, policies_count: 15).policies.length # 15
       
     end  
   end

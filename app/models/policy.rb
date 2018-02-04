@@ -13,7 +13,7 @@
 #  needs_revision :boolean
 #
 
-class Policy < ActiveRecord::Base
+class Policy < ApplicationRecord
   has_many :commitments
   has_many :sites, through: :commitments
   has_many :subscriptions
@@ -21,7 +21,7 @@ class Policy < ActiveRecord::Base
   has_many :versions
   has_one :crawl
   
-  attr_accessible :detail, :lang, :name, :url, :xpath
+  #attr_accessible :detail, :lang, :name, :url, :xpath
   
   validates :name, :url, presence: true
   validates :xpath, uniqueness: {:scope => :url}

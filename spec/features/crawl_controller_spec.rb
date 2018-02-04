@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe "CrawlController", disabled: true do
-  before { @crawl = FactoryGirl.create(:crawl) }
+RSpec.describe "CrawlController", disabled: true do
+  before { @crawl = FactoryBot.create(:crawl) }
   subject { page }
 
   context "as an admin" do
     before(:each) do
-      @admin = FactoryGirl.create(:admin)
+      @admin = FactoryBot.create(:admin)
       sign_in @admin
     end
 
@@ -24,7 +24,7 @@ describe "CrawlController", disabled: true do
   
   context "as regular user" do
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       sign_in @user
     end
     

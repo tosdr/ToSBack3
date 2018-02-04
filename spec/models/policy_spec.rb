@@ -15,13 +15,13 @@
 
 require 'spec_helper'
 
-describe Policy do
+RSpec.describe Policy, disabled: true do
   it "has a valid factory" do
-    FactoryGirl.build(:policy).should be_valid
+    FactoryBot.build(:policy).should be_valid
   end
   
-  # let(:example) { FactoryGirl.create(:policy) }
-  before(:each) { @example = FactoryGirl.create(:policy) }
+  # let(:example) { FactoryBot.create(:policy) }
+  before(:each) { @example = FactoryBot.create(:policy) }
     
   it { should respond_to(:sites) }
   it { should respond_to(:commitments) }
@@ -36,16 +36,16 @@ describe Policy do
   
   describe "#validates presence" do
     it "is invalid without a name" do
-      FactoryGirl.build(:policy, name: nil).should_not be_valid
+      FactoryBot.build(:policy, name: nil).should_not be_valid
     end 
     it "is invalid without a url" do
-      FactoryGirl.build(:policy, url: nil).should_not be_valid
+      FactoryBot.build(:policy, url: nil).should_not be_valid
     end
   end # validates
   
   describe "creating duplicate policy" do
-    # let(:dup) { FactoryGirl.build(:policy, url: @example.url, xpath: @example.xpath) } # using before to be more consistent
-    before(:each) { @dup = FactoryGirl.build(:policy, url: @example.url, xpath: @example.xpath) }
+    # let(:dup) { FactoryBot.build(:policy, url: @example.url, xpath: @example.xpath) } # using before to be more consistent
+    before(:each) { @dup = FactoryBot.build(:policy, url: @example.url, xpath: @example.xpath) }
   
     it "is invalid if it has duplicate url and xpath" do
       @dup.should_not be_valid
@@ -61,7 +61,7 @@ describe Policy do
   end # when policy is dup
   
   describe "updating a policy" do
-    before (:all) { @modified = FactoryGirl.create(:policy) }
+    before (:all) { @modified = FactoryBot.create(:policy) }
     after (:all) {Policy.destroy_all}
     
     context "when policy name is changed" do
@@ -111,7 +111,7 @@ describe Policy do
   end # updating a policy
 
   describe ".reviewed" do
-    let!(:policies) { FactoryGirl.create_list(:policy, 3) }
+    let!(:policies) { FactoryBot.create_list(:policy, 3) }
     it "scopes to policies with needs_revision == nil" do
       policies[0].needs_revision = nil
       policies[0].save

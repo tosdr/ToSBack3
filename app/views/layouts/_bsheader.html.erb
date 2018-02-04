@@ -7,8 +7,8 @@
       <nav>
         <ul class="nav pull-right">
           <% if signed_in? %>
-            <li><%= link_to "Subscriptions", user_path(current_user) %></li>
-            <li><%= link_to "Account", edit_user_path(current_user) %></li>			
+            <li><%= link_to "Subscriptions", user_path(helpers.current_user) %></li>
+            <li><%= link_to "Account", edit_user_path(helpers.current_user) %></li>			
             <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
           <% else %>
             <li><%= link_to "Sign in", signin_path %></li>

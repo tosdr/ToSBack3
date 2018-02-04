@@ -1,5 +1,5 @@
 class VersionsController < ApplicationController
-  before_filter :get_policy
+  before_action :get_policy
   
   def index
     @versions = @policy.versions.paginate(page: params[:page])

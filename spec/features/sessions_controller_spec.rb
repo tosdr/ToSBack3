@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "SessionsController", disabled: true do
+RSpec.describe "SessionsController", disabled: true do
   subject { page }
   
   describe "visiting signin_path" do
@@ -11,7 +11,7 @@ describe "SessionsController", disabled: true do
     it { should have_button("Sign in") }
     
     describe "signing in" do
-      before (:all) { @user = FactoryGirl.create(:user) }
+      before (:all) { @user = FactoryBot.create(:user) }
       after (:all) { @user.destroy }
       
       context "when login info is invalid" do

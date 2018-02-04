@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Notification do
-  let(:notification) { FactoryGirl.build(:notification) }
+RSpec.describe Notification, type: :model do
+  let(:notification) { FactoryBot.build(:notification) }
 
   it "has a valid factory" do
     expect(notification).to be_valid

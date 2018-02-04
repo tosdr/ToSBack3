@@ -1,6 +1,6 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :policy do
     sequence(:name) { |n| "Privacy Policy #{n}" }
     sequence(:url) { |n| "http://www.example#{n}.com/privacy" }
@@ -24,9 +24,9 @@ FactoryGirl.define do
       end
 
       after(:create) do |policy, eval|
-        eval.sites_count.times { policy.sites << FactoryGirl.create(:site) }
+        eval.sites_count.times { policy.sites << FactoryBot.create(:site) }
         eval.versions_count.times do |n| 
-          policy.versions << FactoryGirl.create(:version, policy: policy, previous_policy: policy.detail[0..-(n+2)], created_at: (n+1).days.ago)
+          policy.versions << FactoryBot.create(:version, policy: policy, previous_policy: policy.detail[0..-(n+2)], created_at: (n+1).days.ago)
           
           # i.e. older the created_at date in the db, the shorter the version is. e.g. two days old = two characters sliced off.
           # appears in tests like one character is added per day

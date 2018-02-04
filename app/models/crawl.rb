@@ -10,10 +10,10 @@
 #  crawled_policy :text
 #
 
-class Crawl < ActiveRecord::Base
+class Crawl < ApplicationRecord
   belongs_to :policy
 
-  attr_accessible :crawled_policy, :full_page
+  #attr_accessible :crawled_policy, :full_page
   
   validates :policy_id, presence: true, uniqueness: true
 end

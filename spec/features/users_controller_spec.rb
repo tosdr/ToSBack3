@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "UsersController", disabled: true do
+RSpec.describe "UsersController", disabled: true do
   subject { page }
   
   describe "visiting signup_path" do
@@ -14,7 +14,7 @@ describe "UsersController", disabled: true do
     
     describe "signing up" do
       before do
-        @user = FactoryGirl.build(:user)
+        @user = FactoryBot.build(:user)
         fill_in "user_name", with: @user.name
         fill_in "user_email", with: @user.email
         fill_in "user_password", with: @user.password
@@ -46,7 +46,7 @@ describe "UsersController", disabled: true do
 
   describe "editing account info" do
     before (:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       sign_in @user
       visit edit_user_path(@user)
     end

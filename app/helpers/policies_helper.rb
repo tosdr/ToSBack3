@@ -1,2 +1,0 @@
-module PoliciesHelper
-end

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:edit, :update]
-  before_filter :correct_user, only: [:edit, :update]
+  before_action :signed_in_user, only: [:edit, :update]
+  before_action :correct_user, only: [:edit, :update]
   
   def new
     @user = User.new
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       flash[:success] = "Welcome to TOSBack!"
-      sign_in @user
+      helpers.sign_in @user
       redirect_to user_path(@user)
     else
       render :new
@@ -39,9 +39,9 @@ end
 private
 
 def signed_in_user
-  redirect_to signin_path, notice: "Please sign in." unless signed_in?
+  redirect_to signin_path, notice: "Please sign in." unless helpers.signed_in?
 end
 
 def correct_user
-  redirect_to root_path unless current_user == User.find(params[:id])
+  redirect_to root_path unless helpers.current_user == User.find(params[:id])
 end
