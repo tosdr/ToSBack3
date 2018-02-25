@@ -22,13 +22,13 @@ RSpec.describe Commitment, disabled: true do
   describe "#validates" do
     let(:comm) { FactoryBot.build(:commitment) }
     
-    it "is invalid without site_id" do
-      FactoryBot.build(:commitment, site_id: nil).should_not be_valid
-    end
+    #it "is invalid without site_id" do
+      #FactoryBot.build(:commitment, site_id: nil).should_not be_valid
+    #end
     
-    it "is invalid without policy_id" do
-      FactoryBot.build(:commitment, policy_id: nil).should_not be_valid
-    end
+    #it "is invalid without policy_id" do
+      #FactoryBot.build(:commitment, policy_id: nil).should_not be_valid
+    #end
     
     context "when row exists in database" do
       let!(:eg) { FactoryBot.create(:commitment) }

@@ -5,9 +5,7 @@
 #  id             :integer          not null, primary key
 #  name           :string(255)
 #  url            :string(255)
-#  xpath          :string(255)
 #  lang           :string(255)
-#  detail         :text
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  needs_revision :boolean
@@ -30,10 +28,6 @@ RSpec.describe Policy, disabled: true do
   it { should respond_to(:subscriptions) }
   it { should respond_to(:users) }
   
-  it "creates an initial version automatically" do
-    @example.versions.count.should eq(1)
-  end
-  
   describe "#validates presence" do
     it "is invalid without a name" do
       FactoryBot.build(:policy, name: nil).should_not be_valid
@@ -43,72 +37,71 @@ RSpec.describe Policy, disabled: true do
     end
   end # validates
   
-  describe "creating duplicate policy" do
-    # let(:dup) { FactoryBot.build(:policy, url: @example.url, xpath: @example.xpath) } # using before to be more consistent
-    before(:each) { @dup = FactoryBot.build(:policy, url: @example.url, xpath: @example.xpath) }
+  #describe "creating duplicate policy" do
+    #before(:each) { @dup = FactoryBot.build(:policy, url: @example.url, xpath: @example.xpath) }
   
-    it "is invalid if it has duplicate url and xpath" do
-      @dup.should_not be_valid
-    end
-    it "is valid if url is duplicate but xpath is different" do
-      @dup.xpath = "//div[@id='xxxxx']"
-      @dup.should be_valid
-    end
-    it "is valid if xpath is duplicate but url is different" do
-      @dup.url = "http://ex.com/terms"
-      @dup.should be_valid
-    end
-  end # when policy is dup
+    #it "is invalid if it has duplicate url and xpath" do
+      #@dup.should_not be_valid
+    #end
+    #it "is valid if url is duplicate but xpath is different" do
+      #@dup.xpath = "//div[@id='xxxxx']"
+      #@dup.should be_valid
+    #end
+    #it "is valid if xpath is duplicate but url is different" do
+      #@dup.url = "http://ex.com/terms"
+      #@dup.should be_valid
+    #end
+  #end # when policy is dup
   
-  describe "updating a policy" do
-    before (:all) { @modified = FactoryBot.create(:policy) }
-    after (:all) {Policy.destroy_all}
+  #describe "updating a policy" do
+    #before (:all) { @modified = FactoryBot.create(:policy) }
+    #after (:all) {Policy.destroy_all}
     
-    context "when policy name is changed" do
-      before (:all) { @modified.name = "some new policy name"}
+    #context "when policy name is changed" do
+      #before (:all) { @modified.name = "some new policy name"}
       
-      it "needs_new_version? returns false" do
-        @modified.send(:needs_new_version?).should eq(false)
-      end
+      #it "needs_new_version? returns false" do
+        #@modified.send(:needs_new_version?).should eq(false)
+      #end
       
-      it "doesn't add a new version when saved" do
-        expect{@modified.save}.to_not change{@modified.versions.count}.by(1)
-      end
-    end
+      #it "doesn't add a new version when saved" do
+        #expect{@modified.save}.to_not change{@modified.versions.count}.by(1)
+      #end
+    #end
     
-    context "when policy detail is changed" do
-      before (:all) { @modified.detail = "new crawl" }
+    #context "when policy detail is changed" do
+      #before (:all) { @modified.detail = "new crawl" }
       
-      it "needs_new_version? returns true" do
-        @modified.send(:needs_new_version?).should eq(true)
-      end
+      #it "needs_new_version? returns true" do
+        #@modified.send(:needs_new_version?).should eq(true)
+      #end
       
-      context "and policy detail is saved" do
-        before (:all) do
-          @old_crawl = @modified.detail_was
-          @modified.save
-        end
+      #context "and policy detail is saved" do
+        #before (:all) do
+          #@old_crawl = @modified.detail_was
+          #@modified.save
+        #end
       
-        it "isn't dirty" do
-          @modified.changed?.should eq(false)
-        end
+        #it "isn't dirty" do
+          #@modified.changed?.should eq(false)
+        #end
       
-        it "adds a new version" do
-          @modified.versions.count.should eq(2)
-        end
+        #it "adds a new version" do
+          #@modified.versions.count.should eq(2)
+        #end
       
-        specify "second to last version equals old policy detail" do
-          @modified.versions[-2].previous_policy.should eq(@old_crawl)
-        end
+        #specify "second to last version equals old policy detail" do
+          #@modified.versions[-2].previous_policy.should eq(@old_crawl)
+        #end
       
-        specify "most recent version represents current version" do
-          @modified.versions.last.previous_policy.should eq("Current Version")
-        end
+        #specify "most recent version represents current version" do
+          #@modified.versions.last.previous_policy.should eq("Current Version")
+        #end
         
-      end # policy is saved
-    end 
+      #end # policy is saved
+    #end 
     
-  end # updating a policy
+  #end # updating a policy
 
   describe ".reviewed" do
     let!(:policies) { FactoryBot.create_list(:policy, 3) }

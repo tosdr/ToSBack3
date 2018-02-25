@@ -10,6 +10,7 @@ RSpec.describe "Site Controller", disabled: true do
     after(:all) do
       Site.delete_all
       Policy.delete_all
+      Commitment.delete_all
     end
     
     before(:each) do
@@ -60,7 +61,7 @@ RSpec.describe "Site Controller", disabled: true do
         end
       end
       
-      specify "policy names are links to policy pages" do
+      xspecify "policy names are links to policy pages" do
         click_link site.policies.first.name
         page.should have_selector("h1", site.policies.first.name )
       end

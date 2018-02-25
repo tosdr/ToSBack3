@@ -6,7 +6,11 @@ RSpec.describe "PoliciesController", disabled: true do
   
   describe "visiting #index", disabled: true do
     before(:all) { 31.times { FactoryBot.create(:policy) } }
-    after(:all)  { Policy.delete_all }
+    after(:all) do
+      Policy.delete_all
+      Site.delete_all
+      Commitment.delete_all
+    end
 
     before(:each) do
       visit policies_path
@@ -39,7 +43,7 @@ RSpec.describe "PoliciesController", disabled: true do
       # let(:changes) { Nokogiri::HTML(page.source).xpath("//div[@id='policy_changes']/node()").to_s }
       
       it { should have_selector('h1', text: @policy.name) }
-      it { should have_selector('h3', text: @policy.updated_at.to_date.strftime("%B %-d, %Y")) }
+      it { should have_selector('h3', text: @policy.versions.first.created_at.to_date.strftime("%B %-d, %Y")) }
       
       it "paginates site links to the first 10" do
         @policy.sites.each_with_index do |site, i|
@@ -64,7 +68,7 @@ RSpec.describe "PoliciesController", disabled: true do
       end
       
       it { should have_selector('div.pagination') }      
-      it { should have_selector('div#policy_current') }
+      it { should have_selector('div#policy_text') }
       
       context "clicking a link to a different version" do
         before { click_link(@policy.versions[5].created_at.to_date.strftime("%B %-d, %Y")) }
@@ -72,6 +76,15 @@ RSpec.describe "PoliciesController", disabled: true do
         it { should have_selector('h3', text: @policy.versions[5].created_at.to_date.strftime("%B %-d, %Y")) }
       end
     end #many 
+
+    context "when policy has no versions" do
+      before do
+        @policy = FactoryGirl.create(:policy_with_sites_and_versions, sites_count: 1, versions_count: 0)
+        visit policy_path(@policy)
+      end
+
+      it { should have_content("Sorry") }
+    end #no versions
          
   end #visiting #show
 end

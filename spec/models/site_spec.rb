@@ -41,7 +41,8 @@ RSpec.describe Site, disabled: true do
     it "scopes to sites with reviewed policies" do
       site.policies[0].needs_revision = true
       site.policies[0].save
-      expect(Site.reviewed.count).to eq(4)
+      # Would be 10 due to policy factory creating sites too
+      expect(Site.reviewed.count).to eq(8)
     end
   end
 end

@@ -11,18 +11,20 @@
     <div id="blockbody">
       <h3>View version from:</h3>
       <ul class="versions">
-        <% @versions.each do |v| %>
-          <li><%= link_to v.created_at.to_date.to_formatted_s(:long), policy_version_path(@policy,v.id) %></li>
-        <% end %>
+        <%= render @policy_presenter.versions %>
       </ul>
       <h4><%= link_to "View all versions...", policy_versions_path(@policy) %></h4>
     </div>
   </div>
 <% end %>
 
-<h1><%= @policy.name %></h1>
-<h3>ToSBack stored this version on <%= @policy.created_at.to_date.to_formatted_s(:long) %></h3>
+<%= content_tag :div, id: 'version_info', data: {current_version: @policy.versions.first.id} do %>
+<% end %>
 
-<div id="policy_current">
-  <%= @policy.detail.html_safe %>
+<h1><%= @policy_presenter.name %></h1>
+<span id="date_text"><%= @policy_presenter.default_date %></span>
+
+<div id="policy_diff"></div>
+<div id="policy_text">
+  <%= @policy_presenter.default_version_text %>
 </div>

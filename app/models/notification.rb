@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: notifications
+#
+#  id         :integer          not null, primary key
+#  site       :string(255)
+#  name       :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  diff_url   :string(255)
+#
+
 class Notification < ApplicationRecord
   #attr_accessible :name, :site, :diff_url
   

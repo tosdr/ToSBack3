@@ -1,0 +1,2 @@
+$("#policy_text").html("<%= j @version.text.html_safe %>");
+$("#policy_date").html("<%= j @version.created_at.to_date.to_formatted_s(:long) %>");

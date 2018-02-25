@@ -32,7 +32,7 @@ RSpec.describe "VersionsController", disabled: true do
       it { should have_selector('h1', text: @policy.name) }
       it { should have_selector('h3', text: @version.created_at.to_date.strftime("%B %-d, %Y")) }
       
-      it { should have_selector('div#previous_policy') }
+      it { should have_selector('div#previous_text') }
       
       context "clicking a link to a different version" do
         before { click_link(@policy.versions[5].created_at.to_date.strftime("%B %-d, %Y")) }

@@ -2,7 +2,8 @@
 
 FactoryBot.define do
   factory :version do
-    sequence(:previous_policy) { |n| "Crawl Data #{n}" }
+    sequence(:text) { |n| "Crawl Data #{n}" }
+    sequence(:xpath) { |n| "//div[@id='content_#{n}']" }
     policy
   end
 end
