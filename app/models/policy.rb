@@ -19,14 +19,13 @@ class Policy < ApplicationRecord
   has_many :versions, inverse_of: :policy
   has_one :crawl
   
-  #attr_accessible :detail, :lang, :name, :url, :xpath
-  
   validates :name, :url, presence: true
 
   def self.reviewed
     where(needs_revision: nil)
   end
 
+  #TODO null object pattern instead of string to make behavior consistent
   def current_version
     versions.first || "Sorry, there don't seem to be any versions of this policy stored!"
   end

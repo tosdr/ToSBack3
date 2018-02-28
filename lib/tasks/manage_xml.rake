@@ -4,6 +4,20 @@ namespace :xml do
   task :import_xml => :environment do
     path = ENV['path']
     # Point path to tosback2 folder ( e.g. rake xml:import_xml path=../../tosdr/tosback2/ )
+    raise ArgumentError.new "\n\nMust include path like so:\nrails xml:import_xml path=../tosback2/\n\n" if path == nil
+
+    io = IO.popen("cd #{path}; git log --format='%H %s' --after=#{3.days.ago.strftime('%d/%m/%Y')}")
+    commit_string = io.read
+    io.close
+
+    reviewed_hash = nil
+    commit_string.each_line do |commit|
+      break if reviewed_hash
+
+      commit_ary = commit.strip.split(/\s/,2)
+      reviewed_hash = commit_ary[0] if commit_ary[1] == 'changes for reviewed docs'
+    end
+
     Dir.foreach(path+"rules/") do |xml_file| # loop for each xml file/rule
       next if xml_file == "." || xml_file == ".."
     
@@ -32,14 +46,13 @@ namespace :xml do
           p = Policy.create do |plcy|
             plcy.name = doc_hash[:name] 
             plcy.url = doc_hash[:url]
-            #plcy.xpath = doc_hash[:xpath]
+            plcy.xpath = doc_hash[:xpath]
             plcy.needs_revision = doc_hash[:nr]
             plcy.lang = doc_hash[:lang] 
             #TODO see if chomp is necessary for making the diffs work right once the
             # new crawler is finished
             File.open(path+doc_hash[:txt_file]) do |crawl|
-              plcy.versions.new(xpath: doc_hash[:xpath], text: crawl.read.chomp)
-              #plcy.detail = crawl.read.chomp
+              plcy.versions.new(text: crawl.read.chomp, diff_url: "https://github.com/tosdr/tosback2/commit/#{reviewed_hash}?diff=split")
             end
           end
         end # if p.nil?
@@ -65,6 +78,7 @@ namespace :xml do
   task :export_xml => :environment do
     # Point path to tosback2 folder ( e.g. rake xml:export_xml path=../../tosdr/tosback2/ )
     path = ENV['path'] + "rules/"
+    raise ArgumentError.new "\n\nMust include path like so:\nrails xml:export_xml path=../tosback2/\n\n" if path == nil
     
     Dir.mkdir(path) unless File.exists?(path)
     
@@ -75,7 +89,7 @@ namespace :xml do
       site.policies.each do |policy|
         rule_file.print "  <docname name=\"#{CGI.escape_html(policy.name)}\">\n"
         rule_file.print "    <url name=\"#{CGI.escape_html(policy.url)}\""
-        rule_file.print " xpath=\"#{policy.versions.first.xpath}\"" unless policy.xpath.nil?
+        rule_file.print " xpath=\"#{policy.xpath}\"" unless policy.xpath.nil?
         rule_file.print " lang=\"#{policy.lang}\"" unless policy.lang.nil?
         rule_file.print " reviewed=\"true\"" unless policy.needs_revision
         rule_file.print ">\n"

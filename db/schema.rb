@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141207153710) do
+ActiveRecord::Schema.define(version: 20180228214750) do
 
   create_table "commitments", force: :cascade do |t|
     t.integer "policy_id"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 20141207153710) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "needs_revision"
+    t.string "xpath"
+    t.boolean "obsolete"
   end
 
   create_table "sites", force: :cascade do |t|
@@ -73,7 +75,8 @@ ActiveRecord::Schema.define(version: 20141207153710) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "full_page"
-    t.string "xpath"
+    t.string "former_site"
+    t.string "diff_url"
   end
 
 end
