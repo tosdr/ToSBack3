@@ -1,0 +1,17 @@
+// Place all the styles related to the Policies controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#version_info {
+  margin-bottom: 20px;
+  h1 {
+    font-size: 18px;
+  }
+}
+
+#policy_text {
+  border: 1px solid $box-shadow-color;
+  box-shadow: 3px 3px $box-shadow-color;
+  padding: 5px;
+  margin-right: 5px;
+}
