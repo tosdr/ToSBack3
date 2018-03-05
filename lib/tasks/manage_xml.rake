@@ -37,9 +37,9 @@ namespace :xml do
         doc_hash[:name] = doc.at_xpath("./@name").to_s
         doc_hash[:url] = doc.at_xpath("./url/@name").to_s
         doc_hash[:xpath] = (doc.at_xpath("./url/@xpath").to_s == "") ? nil : doc.at_xpath("./url/@xpath").to_s
-        doc_hash[:nr] = ((doc.at_xpath("./url/@reviewed").to_s == "") || (doc.at_xpath("./url/@reviewed").to_s == "false")) ? true : nil
+        doc_hash[:nr] = ((doc.at_xpath("./url/@reviewed").to_s == "") || (doc.at_xpath("./url/@reviewed").to_s == "false")) ? true : false
         doc_hash[:lang] = (doc.at_xpath("./url/@lang").to_s == "") ? nil : doc.at_xpath("./url/@lang").to_s
-        doc_hash[:txt_file] = (doc_hash[:nr] == nil) ? "crawl_reviewed/#{site.name}/#{doc_hash[:name]}.txt" : "crawl/#{site.name}/#{doc_hash[:name]}.txt"
+        doc_hash[:txt_file] = (doc_hash[:nr] == false) ? "crawl_reviewed/#{site.name}/#{doc_hash[:name]}.txt" : "crawl/#{site.name}/#{doc_hash[:name]}.txt"
 
         p = Policy.where(url:doc_hash[:url], name: doc_hash[:name]).first
         if p.nil?
@@ -52,7 +52,9 @@ namespace :xml do
             #TODO see if chomp is necessary for making the diffs work right once the
             # new crawler is finished
             File.open(path+doc_hash[:txt_file]) do |crawl|
-              plcy.versions.new(text: crawl.read.chomp, diff_url: "https://github.com/tosdr/tosback2/commit/#{reviewed_hash}?diff=split")
+              plcy.versions.new(text: crawl.read.chomp) do |ver|
+                ver.diff_url = "https://github.com/tosdr/tosback2/commit/#{reviewed_hash}?diff=split" unless plcy.needs_revision
+              end
             end
           end
         end # if p.nil?
