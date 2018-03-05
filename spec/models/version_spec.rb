@@ -14,59 +14,36 @@
 
 require 'spec_helper'
 
-RSpec.describe Version, disabled: true do
+RSpec.describe Version do
   let(:version) { FactoryBot.build(:version) }
   
   it "has a valid factory" do
-    version.should be_valid
+    expect(version).to be_valid
   end
   
-  it { should respond_to(:policy) }
-  #it { should respond_to(:changes_from_previous) }
+  it 'responds to policy' do
+    expect(version).to respond_to(:policy)
+  end
   
   describe "#validates presence" do
     it "is invalid without a policy_id" do
       version.policy_id = nil
-      version.should_not be_valid
+      expect(version).not_to be_valid
     end
     
     it "is invalid without text" do
       version.text = "   "
-      version.should_not be_valid
+      expect(version).not_to be_valid
     end
   end #validates presence
-  
-  #describe "changes_from_previous()" do
-    ## policy model has a callback that creates a version 'current version' so
-    ## @policy really has 4 versions below even though versions_count is 3
-    ## see factories/policies.rb for details on differences between versions
-    #let(:vcount) { 3 }
-    
-    #before(:each) { @policy = FactoryBot.create(:policy_with_sites_and_versions, sites_count: 1, versions_count: vcount) } 
-    #let(:original_detail) { FactoryBot.attributes_for(:policy)[:detail] }
-        
-    #it "current versions use policy.detail instead of previous_policy's 'Current Version'" do
-      #@version = @policy.versions.first
-      #@version.changes_from_previous.should eq(Diffy::Diff.new(@policy.detail[0..-2], @policy.detail).to_s(:html))
-    #end
-    
-    #context "with a newer better policy.detail" do
-      #before(:each) do
-        #@policy.detail = "newer better policy"
-        #@policy.save
-        #@policy.reload
-      #end
-      
-      #it "newest version diffs policy.detail with version.previous_policy" do
-        #@version = @policy.versions.first
-        #@version.changes_from_previous.should eq(Diffy::Diff.new(original_detail, "newer better policy").to_s(:html))
-      #end
-      
-      #it "earliest version returns original policy detail (version.previous_policy)" do
-        #@version = @policy.versions.last
-        #@version.changes_from_previous.should eq(Diffy::Diff.new(original_detail[0..-(vcount+1)], original_detail[0..-(vcount+1)]).to_s(:html))
-      #end
-    #end
-    
-  #end
+
+  describe "default order" do
+    let!(:older_version) { FactoryBot.create(:version, created_at: 1.day.ago) }
+    let!(:newer_version) { FactoryBot.create(:version, policy: older_version.policy) }
+    let!(:oldest_version) { FactoryBot.create(:version, created_at: 3.day.ago, policy: older_version.policy) }
+
+    it "uses created_at to determine newest version" do
+      expect(Version.first).to eq(newer_version)
+    end
+  end
 end

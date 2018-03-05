@@ -15,12 +15,12 @@ FactoryBot.define do
     factory :site_with_policies do
       # policies_count is declared as an ignored attribute and available in
       # attributes on the factory, as well as the callback via the evaluator
-      ignore do
+      transient do
         policies_count 5
       end
 
       after(:create) do |site, evaluator|
-        evaluator.policies_count.times { site.policies << FactoryBot.create(:policy, needs_revision: nil)}
+        evaluator.policies_count.times { site.policies << FactoryBot.create(:policy, needs_revision: false)}
       end
       
       # This allows us to do:

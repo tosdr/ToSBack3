@@ -13,7 +13,7 @@
 
 FactoryBot.define do
   factory :commitment, :class => 'Commitment' do
-    policy_id 1
-    site_id 1
+    policy
+    site
   end
 end

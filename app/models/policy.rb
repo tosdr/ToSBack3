@@ -22,12 +22,14 @@ class Policy < ApplicationRecord
   has_one :crawl
   
   validates :name, :url, presence: true
+  validates :xpath, uniqueness: { scope: :url }
 
   def self.reviewed
-    where(needs_revision: nil)
+    where(needs_revision: false)
   end
 
   #TODO null object pattern instead of string to make behavior consistent
+  #TODO delete unused method?
   def current_version
     versions.first || "Sorry, there don't seem to be any versions of this policy stored!"
   end

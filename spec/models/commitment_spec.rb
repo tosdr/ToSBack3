@@ -11,40 +11,48 @@
 
 require 'spec_helper'
 
-RSpec.describe Commitment, disabled: true do
+RSpec.describe Commitment do
+  let(:commitment) { FactoryBot.build(:commitment) }
+
   it "has a valid factory" do
-    FactoryBot.build(:commitment).should be_valid
+    expect(commitment).to be_valid
   end
   
-  it { should respond_to(:site) }
-  it { should respond_to(:policy) }
+  it 'responds to site' do
+    expect(commitment).to respond_to(:site)
+  end
+
+  it 'responds to policy' do
+    expect(commitment).to respond_to(:policy)
+  end
   
   describe "#validates" do
-    let(:comm) { FactoryBot.build(:commitment) }
+    it "is invalid without site_id" do
+      commitment.site_id = nil
+      expect(commitment).not_to be_valid
+    end
     
-    #it "is invalid without site_id" do
-      #FactoryBot.build(:commitment, site_id: nil).should_not be_valid
-    #end
-    
-    #it "is invalid without policy_id" do
-      #FactoryBot.build(:commitment, policy_id: nil).should_not be_valid
-    #end
-    
-    context "when row exists in database" do
+    it "is invalid without policy_id" do
+      commitment.policy_id = nil
+      expect(commitment).not_to be_valid
+    end
+
+    #don't think these are really needed:
+    context "when row exists in database", disabled: true do
       let!(:eg) { FactoryBot.create(:commitment) }
 
       it "is is invalid if the site and policy ids are both duplicates" do
-        comm.should_not be_valid
+        expect(commitment).not_to be_valid
       end
       
       it "is valid if site id is unique and policy id exists" do
-        comm.site_id = 2
-        comm.should be_valid
+        commitment.site_id = 2
+        expect(commitment).to be_valid
       end
       
       it "is valid if policy id is unique and site id exists" do
-        comm.policy_id = 2
-        comm.should be_valid
+        commitment.policy_id = 2
+        expect(commitment).to be_valid
       end
     end
   end #validates

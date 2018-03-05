@@ -10,29 +10,34 @@
 
 require 'spec_helper'
 
-RSpec.describe Site, disabled: true do
+RSpec.describe Site do
+  let(:site) { FactoryBot.create(:site) }
+
   it "has a valid factory" do
-    FactoryBot.create(:site).should be_valid
+    expect(site).to be_valid
   end
 
   it "is invalid without a url" do
-    FactoryBot.build(:site, name: nil).should_not be_valid
+    expect(FactoryBot.build(:site, name: nil)).not_to be_valid
   end
   
-  it { should respond_to(:policies) }  
-  it { should respond_to(:commitments) }
+  it 'responds to policies' do
+    expect(site).to respond_to(:policies)
+  end  
+  it 'responds to commitments' do
+    expect(site).to respond_to(:commitments)
+  end
     
   describe "#validates uniqueness" do
-    let!(:example) { FactoryBot.create(:site) }
-    let(:dup_site) { FactoryBot.build(:site, name: example.name) }
+    let(:dup_site) { FactoryBot.build(:site, name: site.name) }
         
     it "is invalid without a unique url" do
-      dup_site.should_not be_valid
+      expect(dup_site).not_to be_valid
     end
     
     it "is invalid if url isn't unique (case insensitive)" do
       dup_site.name.upcase!
-      dup_site.should_not be_valid
+      expect(dup_site).not_to be_valid
     end
   end #validates uniqueness  
 
@@ -41,8 +46,8 @@ RSpec.describe Site, disabled: true do
     it "scopes to sites with reviewed policies" do
       site.policies[0].needs_revision = true
       site.policies[0].save
-      # Would be 10 due to policy factory creating sites too
-      expect(Site.reviewed.count).to eq(8)
+      # Would be 6 before save due to policy factory creating sites too
+      expect(Site.reviewed.count).to eq(5)
     end
   end
 end

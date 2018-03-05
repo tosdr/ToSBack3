@@ -21,13 +21,15 @@ FactoryBot.define do
     sequence(:url) { |n| "http://www.example#{n}.com/privacy" }
     lang "EN"
     needs_revision true
-    ignore do
+    xpath "//div[@id='content']"
+    obsolete false
+    transient do
       sites_count 1
       versions_count 0
     end
     
     factory :policy_with_sites_and_versions do
-      ignore do
+      transient do
         sites_count 5
         versions_count 5
       end
