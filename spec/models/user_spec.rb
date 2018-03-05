@@ -3,12 +3,12 @@
 # Table name: users
 #
 #  id              :integer          not null, primary key
-#  name            :string(255)
-#  email           :string(255)
+#  name            :string
+#  email           :string
 #  admin           :boolean
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  password_digest :string(255)
+#  password_digest :string
 #
 
 require 'spec_helper'

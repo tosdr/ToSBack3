@@ -3,11 +3,11 @@
 # Table name: notifications
 #
 #  id         :integer          not null, primary key
-#  site       :string(255)
-#  name       :string(255)
+#  site       :string
+#  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  diff_url   :string(255)
+#  diff_url   :string
 #
 
 class Notification < ApplicationRecord

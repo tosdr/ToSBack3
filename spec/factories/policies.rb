@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: policies
+#
+#  id             :integer          not null, primary key
+#  name           :string
+#  url            :string
+#  lang           :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  needs_revision :boolean
+#  xpath          :string
+#  obsolete       :boolean
+#
+
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryBot.define do

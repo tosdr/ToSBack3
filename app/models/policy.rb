@@ -3,12 +3,14 @@
 # Table name: policies
 #
 #  id             :integer          not null, primary key
-#  name           :string(255)
-#  url            :string(255)
-#  lang           :string(255)
+#  name           :string
+#  url            :string
+#  lang           :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  needs_revision :boolean
+#  xpath          :string
+#  obsolete       :boolean
 #
 
 class Policy < ApplicationRecord
