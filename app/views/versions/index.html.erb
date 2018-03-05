@@ -3,9 +3,7 @@
     <div id="blockbody">
       <h3>View version from:</h3>
       <ul class="versions">
-        <% @versions.each do |v| %>
-          <li><%= link_to v.created_at.to_date.to_formatted_s(:long), policy_version_path(@policy,v.id) %></li>
-        <% end %>
+        <%= render @policy.versions.limit(10) %>
         <!-- TODO: make a partial from this sidebar if we're using in many views -->
       </ul>
       <h4><%= link_to "Back to current policy...", policy_path(@policy) %></h4>
@@ -17,9 +15,7 @@
 <p>Choose a version to see the archived copy and compare what's been changed!</p>
 
 <ul class="policy_versions">
-  <% @versions.each do |v| %>
-    <li><%= link_to v.created_at.to_date.to_formatted_s(:long), [@policy, v] %></li>
-  <% end %>
+  <%= render @versions %>
 </ul>
 <!-- TODO: make this look better/change content on this page to have version stats or something -->
 <%= will_paginate @versions %>

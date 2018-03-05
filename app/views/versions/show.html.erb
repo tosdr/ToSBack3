@@ -3,8 +3,7 @@
     <div id="blockbody">
       <h3>View version from:</h3>
       <ul class="versions">
-        <%= render @versions %>
-        <!-- TODO link to diff path -->
+        <%= render @policy.versions.limit(10) %>
       </ul>
       <h4><%= link_to "View all versions...", policy_versions_path(@policy) %></h4>
       <h4><%= link_to "Back to current policy...", policy_path(@policy) %></h4>
