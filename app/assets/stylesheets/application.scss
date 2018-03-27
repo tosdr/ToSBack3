@@ -13,6 +13,14 @@
 
 /*Global Vars*/
 $box-shadow-color: #ccc;
+$link-color: #f00;
+
+.alert-box {
+  text-align: center;
+  border: 1px dotted #f00;
+  /*background: #9cf;*/
+  padding: 8px;
+}
 
 @import 'notifications';
 @import 'policies';

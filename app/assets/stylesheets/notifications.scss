@@ -14,7 +14,7 @@ body {
 
 a {
   text-decoration: none;
-  color: #f00;
+  color: $link-color;
 }
 
 a:hover {
@@ -280,7 +280,7 @@ img {
 
 .org .info h3 a,
 .policy .info h3 a {
-  color: #f00;
+  color: $link-color;
   font-weight: bold;  
 }
 
