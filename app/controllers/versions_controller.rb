@@ -23,6 +23,7 @@ class VersionsController < ApplicationController
   private
   
   def get_policy
-    @policy = Policy.includes(:versions).find(params[:policy_id])
+    @policy = Policy.includes(:versions,:sites).find(params[:policy_id])
+    @sites = @policy.sites.paginate(page:params[:site_page], per_page: 10)
   end
 end

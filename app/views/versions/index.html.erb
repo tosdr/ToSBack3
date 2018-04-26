@@ -1,5 +1,13 @@
 <% content_for :sidebar do %>
   <div class='block'>
+    <h3>
+      Belongs to:
+    </h3>
+    <div class='blockbody'>
+      <%= render 'shared/list_each_as_link', list_object: @sites, ul_class: "sites" %>
+    </div>
+    <%= will_paginate @sites, param_name: 'site_page' %>
+
     <div id="blockbody">
       <h3>View version from:</h3>
       <ul class="versions">
