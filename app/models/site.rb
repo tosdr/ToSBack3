@@ -16,7 +16,6 @@ class Site < ApplicationRecord
   validates :name, presence: true, uniqueness: {case_sensitive: false}
 
   def self.reviewed
-    joins(:policies).merge(Policy.reviewed).uniq
-    #joins(:policies).where(policies: {needs_revision: nil}).uniq
+    joins(:policies).merge(Policy.reviewed).distinct
   end
 end

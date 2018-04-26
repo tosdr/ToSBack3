@@ -1,6 +1,6 @@
 class SitesController < ApplicationController
   def index
-    @sites = Site.reviewed.paginate(:page => params[:page], count: {group: 'site_id'})
+    @sites = Site.reviewed.paginate(:page => params[:page])
   end
   
   def show
