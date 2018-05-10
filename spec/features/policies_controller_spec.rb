@@ -43,7 +43,7 @@ RSpec.describe "PoliciesController" do
       # let(:changes) { Nokogiri::HTML(page.source).xpath("//div[@id='policy_changes']/node()").to_s }
       
       it { is_expected.to have_selector('h1', text: @policy.name) }
-      it { is_expected.to have_selector('h3', text: @policy.versions.first.created_at.to_date.strftime("%B %-d, %Y")) }
+      it { is_expected.to have_selector('a', text: @policy.versions.first.created_at.to_date.strftime("%B %-d, %Y")) }
       
       it "paginates site links to the first 10" do
         @policy.sites.each_with_index do |site, i|
@@ -73,7 +73,7 @@ RSpec.describe "PoliciesController" do
       context "clicking a link to a different version" do
         before { click_link(@policy.versions[5].created_at.to_date.strftime("%B %-d, %Y")) }
         
-        it { is_expected.to have_selector('h3', text: @policy.versions[5].created_at.to_date.strftime("%B %-d, %Y")) }
+        it { is_expected.to have_content(@policy.versions[5].created_at.to_date.strftime("%B %-d, %Y")) }
       end
     end #many 
 

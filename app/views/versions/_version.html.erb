@@ -1,5 +1,5 @@
 <li>
-  <%= link_to version.created_at.to_date.to_formatted_s(:long), policy_version_path(@policy, version.id), class: "version_link", id: "version_link_"+version.id.to_s %>
+  <%= link_to version.created_at.to_date.strftime("%B %-d, %Y"), policy_version_path(@policy, version.id), class: "version_link", id: "version_link_"+version.id.to_s %>
   <% if version.diff_url %>
     <%= link_to "(diff)", version.diff_url, class: "version_link", id: "version_diff_link_"+version.id.to_s %>
   <% end %>

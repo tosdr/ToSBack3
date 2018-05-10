@@ -15,7 +15,6 @@
 
 FactoryBot.define do
   factory :user do
-    name "John Doe"
     sequence(:email) {|n| "john.doe#{n}@ihopethisisafakedomain.com" }
     password "dictionary"
     password_confirmation "dictionary"

@@ -12,6 +12,8 @@
   
   <%= render 'layouts/header' %>
 
+<div id="body">
+
   <% if flash.any? %>
     <div class="container" id="flash">
       <% flash.each do |key, value| %>
@@ -19,8 +21,6 @@
       <% end %>
     </div>
   <% end %>
-
-<div id="body">
 
   <div id="mission" class="block">
     <h2>TOSBack.org is Under Construction</h2>

@@ -1,43 +1,44 @@
 require 'spec_helper'
 
-RSpec.describe "SessionsController", disabled: true do
+RSpec.describe "SessionsController" do
   subject { page }
   
   describe "visiting signin_path" do
-    before { visit signin_path }
+    before { visit new_user_session_path }
 
-    it { should have_selector('h2', text: "Sign in") }
-    it { should have_link('sign up', href: signup_path) }
-    it { should have_button("Sign in") }
+    it { should have_selector('h2', text: "Log in") }
+    it { should have_link('Sign up', href: new_user_registration_path) }
+    it { should have_button("Log in") }
     
     describe "signing in" do
       before (:all) { @user = FactoryBot.create(:user) }
       after (:all) { @user.destroy }
+      #let!(:user) { FactoryBot.create(:user) }
       
       context "when login info is invalid" do
-        before { click_button "Sign in"}
+        before { click_button "Log in"}
         
-        it { should have_selector('div.alert.alert-error', text: 'invalid') }
+        it { is_expected.to have_selector('div.alert.alert-alert', text: 'Invalid') }
         
         it "url remains at /signin instead of /sessions" do
-          current_path.should eq(signin_path)
+          expect(current_path).to eq(new_user_session_path)
         end
         
         context "when visiting another page after a login failure" do
-          before { click_link "sign up"}
+          before { click_link "Sign up"}
           
-          it { should_not have_selector('div.alert.alert-error', text: 'invalid') }
+          it { should_not have_selector('div.alert.alert-alert', text: 'Invalid') }
         end
         
       end #invalid login info
       
       context "when login info is valid" do        
         before do
+          #binding.pry
           sign_in @user
         end
 
-        it { should have_selector('div.alert.alert-success', text: 'signed in') }
-        it { should have_selector('h2', text: @user.name) }
+        it { is_expected.to have_selector('div.alert.alert-notice', text: 'Signed in') }
         
         it_behaves_like "it has signed in header links" do  # in partials_spec.rb
           let(:user_id) {@user.id}
@@ -46,7 +47,7 @@ RSpec.describe "SessionsController", disabled: true do
         context "clicking sign out" do
           before { click_link "Sign out" }
           
-          it { should have_selector('div.alert.alert-success', text: 'signed out') }
+          it { is_expected.to have_selector('div.alert.alert-notice', text: 'Signed out') }
           it_behaves_like "it has signed out header links"
         end
         

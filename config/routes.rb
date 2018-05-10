@@ -6,18 +6,15 @@ Rails.application.routes.draw do
 
    #root to: 'policies#index'
    
+   #TODO Policies#index references no site and should it just be sites?
    #resources :policies, only: [:index, :show] do
      #resources :versions, only: [:index, :show]
    #end
    #resources :sites, only: [:index, :show]
    #resources :users, only: [:edit, :update, :show]
    
-   #comment these in as we add tests:  
-   #get '/signup',  to: 'users#new', as: 'signup'
-   #post '/signup',  to: 'users#create', as: 'users'
-   #get '/signin',  to: 'sessions#new', as: 'signin'
-   #post '/signin',  to: 'sessions#create'
-   #match '/signout', to: 'sessions#destroy', via: :delete, as: 'signout'
+   #comment this in as we add tests/functionality:  
+   #devise_for :users
   
   ### Uncomment above ^ ###
   

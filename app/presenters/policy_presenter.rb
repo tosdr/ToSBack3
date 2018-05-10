@@ -18,6 +18,6 @@ class PolicyPresenter
   end
 
   def default_date
-    @versions_empty ? " " : "<h3>ToSBack stored this version on #{@policy.versions.first.created_at.to_date.to_formatted_s(:long)}</h3>".html_safe
+    @versions_empty ? " " : "<h3>ToSBack stored this version on #{@policy.versions.first.created_at.to_date.strftime("%B %-d, %Y")}</h3>".html_safe
   end
 end
