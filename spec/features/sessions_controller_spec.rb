@@ -11,9 +11,11 @@ RSpec.describe "SessionsController" do
     it { should have_button("Log in") }
     
     describe "signing in" do
-      before (:all) { @user = FactoryBot.create(:user) }
+      before (:all) do
+        @user = FactoryBot.create(:user)
+        @user.update confirmed_at: Time.now
+      end
       after (:all) { @user.destroy }
-      #let!(:user) { FactoryBot.create(:user) }
       
       context "when login info is invalid" do
         before { click_button "Log in"}
@@ -34,7 +36,6 @@ RSpec.describe "SessionsController" do
       
       context "when login info is valid" do        
         before do
-          #binding.pry
           sign_in @user
         end
 
