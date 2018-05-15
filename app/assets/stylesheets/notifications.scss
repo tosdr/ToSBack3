@@ -104,8 +104,8 @@ img {
 
 #header #projectof {
   position: absolute;
-  right: 0;
-  bottom: 16px;
+  right: -6px;
+  bottom: 6px;
   font-size: 12px;
 
 }
@@ -117,7 +117,7 @@ img {
   text-indent: -5000px;
   float:left;
   margin-left:12px;
-  margin-top:4px;
+  margin-top: -3px;
 }
 
 #tosdr_logo {
@@ -127,7 +127,7 @@ img {
   text-indent: -5000px;
   float:left;
   margin-left:12px;
-  margin-top:4px;
+  margin-top: -2px;
 }
 
 #header #user a {
@@ -186,7 +186,7 @@ img {
 
 #body {
   width: 765px;
-  margin: 16px auto;
+  margin: 8px auto;
 }
 
 .block {
