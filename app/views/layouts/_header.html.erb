@@ -9,21 +9,18 @@
         </div><!--tagline-->
       </a>
 
-      <div id='session-links'>
-        <% if user_signed_in? %>
-          <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-        <% else %>
-          <%= link_to "Sign in", new_user_session_path %>
-        <% end %>
-      </div>
+      <% comment do %>
+        <div id='session-links'>
+          <% if user_signed_in? %>
+            <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+          <% else %>
+            <%= link_to "Sign in", new_user_session_path %>
+          <% end %>
+        </div>
+      <% end %>
 
       <div id="projectof">
-        <%= image_tag "collab.png", alt: "A collaboration between the EFF and ToS;DR" %><br />
-        <a href="http://www.eff.org/"><div id="eff_logo">EFF</div>
-        <!-- <%= image_tag "eff_logo.png", alt:"Electronic Frontier Foundation", id:"eff_logo" %> -->
-        </a>
         <a href="http://tosdr.org/"><div id="tosdr_logo">ToS;DR</div>
-        <!-- <%= image_tag "tosdr_logo.png", alt:"Terms of Service; Didn't Read", id:"tosdr_logo" %> -->
         </a>
       </div>
     </div><!--innerheader-->

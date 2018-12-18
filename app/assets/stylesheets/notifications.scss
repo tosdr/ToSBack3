@@ -104,26 +104,26 @@ img {
 
 #header #projectof {
   position: absolute;
-  right: -6px;
-  bottom: 6px;
+  right: 6px;
+  bottom: 20px;
   font-size: 12px;
 
 }
 
-#eff_logo {
-  width:53px;
-  height:35px;
-  background-image: image-url('eff_logo.png');
-  text-indent: -5000px;
-  float:left;
-  margin-left:12px;
-  margin-top: -3px;
-}
+//#eff_logo {
+//  width:53px;
+//  height:35px;
+//  background-image: image-url('eff_logo.png');
+//  text-indent: -5000px;
+//  float:left;
+//  margin-left:12px;
+//  margin-top: -3px;
+//}
 
 #tosdr_logo {
-  width:32px;
+  width:190px;
   height:32px;
-  background-image: image-url('tosdr_logo.png');
+  background-image: image-url('tosdr-logo-32-w.png');
   text-indent: -5000px;
   float:left;
   margin-left:12px;
@@ -310,22 +310,22 @@ img {
   position: relative;
 }
 
-#footer h5{
-  position: absolute;
-  top: 6px;
-  left: 50px;
-
-  width: 306px;
-  height: 30px;
-  background-image: image-url('footer.png');
-  
-  text-indent: -5000px;
-}
+//#footer h5{
+//  position: absolute;
+//  top: 6px;
+//  left: 50px;
+//
+//  width: 306px;
+//  height: 30px;
+//  background-image: image-url('footer.png');
+//  
+//  text-indent: -5000px;
+//}
 
 #footer #tosdr_footer {
   position: absolute;
-  top: 8px;
-  left: 400px;
+  top: 10px;
+  left: 0px;
 
   width: 190px;
   height: 32px;
