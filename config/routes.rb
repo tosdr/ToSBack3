@@ -7,11 +7,10 @@ Rails.application.routes.draw do
    #root to: 'policies#index'
    
    #TODO Policies#index references no site and should it just be sites?
-   #resources :policies, only: [:index, :show] do
+   #resources :policies, only: [:show] do
      #resources :versions, only: [:index, :show]
    #end
    #resources :sites, only: [:index, :show]
-   #resources :users, only: [:edit, :update, :show]
    
    #comment this in as we add tests/functionality:  
    #devise_for :users

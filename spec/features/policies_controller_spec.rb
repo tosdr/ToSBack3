@@ -4,7 +4,7 @@ RSpec.describe "PoliciesController" do
   
   subject { page }
   
-  describe "visiting #index" do
+  describe "visiting #index", disabled: true do
     before(:all) { 31.times { FactoryBot.create(:policy) } }
     after(:all) do
       Policy.delete_all
