@@ -10,6 +10,12 @@
       </a>
 
       <% comment do %>
+        <div id='search_area'>
+          <%= form_tag(sites_path, method: :get) do %>
+            <%= text_field_tag :search_term, params[:search_term], placeholder: "Search sites..." %>
+            <%= submit_tag 'Search', name: nil %>
+          <% end %>
+        </div>
         <div id='session-links'>
           <% if user_signed_in? %>
             <%= link_to "Account", edit_user_registration_path %>

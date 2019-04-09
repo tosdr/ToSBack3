@@ -32,6 +32,20 @@ RSpec.describe "Site Controller" do
     it "links to site_path(:id)" do
       expect(page).to have_link(Site.first.name, href: site_path(Site.first))
     end
+
+    describe "searching sites" do
+      it "has a search form on the page" do
+        expect(page).to have_selector('input#search_term')
+      end
+
+      it "limits index of sites to the search_term parameter" do
+        fill_in "search_term", with: Site.first.name
+        click_button "Search"
+
+        expect(page).to have_content(Site.first.name)
+        expect(page).not_to have_content(Site.all[1].name)
+      end
+    end
   end #index
   
   describe "site_path(:id)" do
