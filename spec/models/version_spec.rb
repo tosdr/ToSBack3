@@ -27,7 +27,7 @@ RSpec.describe Version do
   
   describe "#validates presence" do
     it "is invalid without a policy_id" do
-      version.policy_id = nil
+      version.policy = nil
       expect(version).not_to be_valid
     end
     

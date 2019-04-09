@@ -18,7 +18,7 @@ FactoryBot.define do
   factory :version do
     policy
     sequence(:text) { |n| "Crawl Data #{n}" }
-    former_site nil
-    diff_url "https://github.com/tosdr/tosback2/commit/bc68a13b5be09be76cf08d62be874d1ca899fa37?diff=split"
+    former_site { nil }
+    diff_url { "https://github.com/tosdr/tosback2/commit/bc68a13b5be09be76cf08d62be874d1ca899fa37?diff=split" }
   end
 end

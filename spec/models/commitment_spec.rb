@@ -28,12 +28,12 @@ RSpec.describe Commitment do
   
   describe "#validates" do
     it "is invalid without site_id" do
-      commitment.site_id = nil
+      commitment.site = nil
       expect(commitment).not_to be_valid
     end
     
     it "is invalid without policy_id" do
-      commitment.policy_id = nil
+      commitment.policy = nil
       expect(commitment).not_to be_valid
     end
 

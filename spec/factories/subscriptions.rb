@@ -13,7 +13,7 @@
 
 FactoryBot.define do
   factory :subscription do
-    policy_id 1
-    user_id 1
+    policy_id { 1 }
+    user_id { 1 }
   end
 end
