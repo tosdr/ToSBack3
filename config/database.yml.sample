@@ -1,0 +1,8 @@
+default: &default
+  pool: 5
+  adapter: sqlite3
+  timeout: 5000
+
+development:
+  <<: *default
+  database: db/development.sqlite3
