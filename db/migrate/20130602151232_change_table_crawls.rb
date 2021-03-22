@@ -1,4 +1,4 @@
-class ChangeTableCrawls < ActiveRecord::Migration
+class ChangeTableCrawls < ActiveRecord::Migration[5.1]
   def up
     change_table :crawls do |t|
       t.rename :scrape, :full_page

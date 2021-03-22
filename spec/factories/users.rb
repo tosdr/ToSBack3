@@ -15,14 +15,14 @@
 
 FactoryBot.define do
   factory :user do
-    name "John Doe"
+    name { "John Doe" }
     sequence(:email) {|n| "john.doe#{n}@ihopethisisafakedomain.com" }
-    password "dictionary"
-    password_confirmation "dictionary"
+    password { "dictionary" }
+    password_confirmation { "dictionary" }
     # admin false
     
     factory :admin do
-      admin true
+      admin { true }
     end #admin
     
   end

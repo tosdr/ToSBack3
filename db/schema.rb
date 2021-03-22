@@ -12,14 +12,14 @@
 
 ActiveRecord::Schema.define(version: 20180228214750) do
 
-  create_table "commitments", force: :cascade do |t|
+  create_table "commitments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "policy_id"
     t.integer "site_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "crawls", force: :cascade do |t|
+  create_table "crawls", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "policy_id"
     t.text "full_page"
     t.datetime "created_at", null: false
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20180228214750) do
     t.text "crawled_policy"
   end
 
-  create_table "notifications", force: :cascade do |t|
+  create_table "notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "site"
     t.string "name"
     t.datetime "created_at", null: false
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20180228214750) do
     t.string "diff_url"
   end
 
-  create_table "policies", force: :cascade do |t|
+  create_table "policies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "name"
     t.string "url"
     t.string "lang"
@@ -46,20 +46,20 @@ ActiveRecord::Schema.define(version: 20180228214750) do
     t.boolean "obsolete"
   end
 
-  create_table "sites", force: :cascade do |t|
+  create_table "sites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "subscriptions", force: :cascade do |t|
+  create_table "subscriptions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "policy_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "name"
     t.string "email"
     t.boolean "admin"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20180228214750) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  create_table "versions", force: :cascade do |t|
+  create_table "versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "policy_id"
     t.text "text"
     t.datetime "created_at", null: false

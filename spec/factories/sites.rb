@@ -16,7 +16,7 @@ FactoryBot.define do
       # policies_count is declared as an ignored attribute and available in
       # attributes on the factory, as well as the callback via the evaluator
       transient do
-        policies_count 5
+        policies_count { 5 }
       end
 
       after(:create) do |site, evaluator|

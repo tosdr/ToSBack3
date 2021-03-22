@@ -1,4 +1,4 @@
-class RenameColumnInVersions < ActiveRecord::Migration
+class RenameColumnInVersions < ActiveRecord::Migration[5.1]
   def up
     rename_column :versions, :previous_crawl, :previous_policy
   end

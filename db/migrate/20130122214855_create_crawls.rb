@@ -1,4 +1,4 @@
-class CreateCrawls < ActiveRecord::Migration
+class CreateCrawls < ActiveRecord::Migration[5.1]
   def change
     create_table :crawls do |t|
       t.integer :policy_id

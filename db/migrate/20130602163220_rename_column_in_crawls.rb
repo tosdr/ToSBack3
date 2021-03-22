@@ -1,4 +1,4 @@
-class RenameColumnInCrawls < ActiveRecord::Migration
+class RenameColumnInCrawls < ActiveRecord::Migration[5.1]
   def up
     rename_column :crawls, :policy, :crawled_policy
   end

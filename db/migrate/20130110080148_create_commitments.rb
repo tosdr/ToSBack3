@@ -1,4 +1,4 @@
-class CreateCommitments < ActiveRecord::Migration
+class CreateCommitments < ActiveRecord::Migration[5.1]
   def change
     create_table :commitments do |t|
       t.integer :policy_id
